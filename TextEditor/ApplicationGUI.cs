@@ -102,7 +102,7 @@ namespace TextEditor
             BuildGUI();
 
             //Fix the size of the window
-            this.Text = "Text Editor++";
+            this.Text = "Текстов редактор";
             this.Size = new Size(1300, 700);
             this.Icon = Properties.Resources.icon;
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -147,7 +147,7 @@ namespace TextEditor
             //Setting up the file menu
             fileMenu = new ToolStripMenuItem()
             {
-                Text = "File",
+                Text = "Файл",
                 Font = new Font("Cascadia Code", 11),
                 BackColor = this.BackColor,
             };
@@ -168,7 +168,7 @@ namespace TextEditor
             //Setting up the new file menu
             newFile = new ToolStripMenuItem()
             {
-                Text = "new file",
+                Text = "нов файл",
                 Font = new Font("Seoge UI", 11),
                 Image = Properties.Resources.newFile
             };
@@ -190,8 +190,9 @@ namespace TextEditor
             //Setting up the open menu
             open = new ToolStripMenuItem()
             {
-                Text = "open",
-                Font = newFile.Font
+                Text = "отвори",
+                Font = newFile.Font,
+                Image = Properties.Resources.open
             };
             open.Click += (sender, eventArgs) => { new SystemEngine().LoadDataFromFile(editor); };
             open.MouseHover += (sender, eventArgs) =>
@@ -211,8 +212,9 @@ namespace TextEditor
             //Setting up the save menu
             save = new ToolStripMenuItem()
             {
-                Text = "save",
-                Font = newFile.Font
+                Text = "запиши",
+                Font = newFile.Font,
+                Image = Properties.Resources.save
             };
             save.MouseHover += (sender, eventArgs) =>
             {
@@ -231,8 +233,9 @@ namespace TextEditor
             //Setting up the reboot menu
             reboot = new ToolStripMenuItem()
             {
-                Text = "restart",
-                Font = newFile.Font
+                Text = "рестартиране",
+                Font = newFile.Font,
+                Image = Properties.Resources.restart
             };
             reboot.MouseHover += (sender, eventArgs) =>
             {
@@ -251,8 +254,9 @@ namespace TextEditor
             //Setting up the exit menu
             exit = new ToolStripMenuItem()
             {
-                Text = "exit",
-                Font = newFile.Font
+                Text = "изход",
+                Font = newFile.Font,
+                Image = Properties.Resources.exit
             };
             exit.MouseHover += (sender, eventArgs) =>
             {
@@ -271,7 +275,7 @@ namespace TextEditor
             //Setting up the edit menu
             editMenu = new ToolStripMenuItem()
             {
-                Text = "Edit",
+                Text = "Редакция",
                 Font = fileMenu.Font,
                 BackColor = fileMenu.BackColor
             };
@@ -291,8 +295,9 @@ namespace TextEditor
             //Setting up the undo menu
             back = new ToolStripMenuItem()
             {
-                Text = "undo",
-                Font = newFile.Font
+                Text = "предишна стъпка",
+                Font = newFile.Font,
+                Image = Properties.Resources.undo
             };
             back.MouseHover += (sender, eventArgs) =>
             {
@@ -311,8 +316,9 @@ namespace TextEditor
             //Setting up the redo menu
             next = new ToolStripMenuItem()
             {
-                Text = "redo",
-                Font = newFile.Font
+                Text = "предходна стъпка",
+                Font = newFile.Font,
+                Image = Properties.Resources.redo
             };
             next.MouseHover += (sender, eventArgs) =>
             {
@@ -331,8 +337,9 @@ namespace TextEditor
             //Setting up the select all menu
             selectAll = new ToolStripMenuItem()
             {
-                Text = "select all",
-                Font = newFile.Font
+                Text = "селектирай всичко",
+                Font = newFile.Font,
+                Image = Properties.Resources.select
             };
             selectAll.MouseHover += (sender, eventArgs) =>
             {
@@ -351,8 +358,9 @@ namespace TextEditor
             //Setting up the cut menu
             cut = new ToolStripMenuItem()
             {
-                Text = "cut",
-                Font = newFile.Font
+                Text = "изрежи",
+                Font = newFile.Font,
+                Image = Properties.Resources.cut
             };
             cut.MouseHover += (sender, eventArgs) =>
             {
@@ -371,8 +379,9 @@ namespace TextEditor
             //Setting up the copy menu
             copy = new ToolStripMenuItem()
             {
-                Text = "copy",
-                Font = newFile.Font
+                Text = "копиране",
+                Font = newFile.Font,
+                Image = Properties.Resources.copy
             };
             copy.MouseHover += (sender, eventArgs) =>
             {
@@ -391,8 +400,9 @@ namespace TextEditor
             //Setting up the paste menu
             paste = new ToolStripMenuItem()
             {
-                Text = "paste",
-                Font = newFile.Font
+                Text = "поставяне",
+                Font = newFile.Font,
+                Image = Properties.Resources.paste
             };
             paste.MouseHover += (sender, eventArgs) =>
             {
@@ -411,8 +421,9 @@ namespace TextEditor
             //Setting up the delete all menu
             deleteAll = new ToolStripMenuItem()
             {
-                Text = "delete all",
-                Font = newFile.Font
+                Text = "изтриване на всичко",
+                Font = newFile.Font,
+                Image = Properties.Resources.delete
             };
             deleteAll.MouseHover += (sender, eventArgs) =>
             {
@@ -431,7 +442,7 @@ namespace TextEditor
             //Settin up the options menu
             optionsMenu = new ToolStripMenuItem()
             {
-                Text = "Options",
+                Text = "Опций",
                 Font = fileMenu.Font,
                 BackColor = fileMenu.BackColor
             };
@@ -451,8 +462,9 @@ namespace TextEditor
             //Setting up the appearance menu
             appearance = new ToolStripMenuItem()
             {
-                Text = "appearance",
-                Font = newFile.Font
+                Text = "изглед",
+                Font = newFile.Font,
+                Image = Properties.Resources.theme
             };
             appearance.MouseHover += (sender, eventArgs) =>
             {
@@ -470,7 +482,7 @@ namespace TextEditor
             //Setting up the blue mode menu
             blueMode = new ToolStripMenuItem()
             {
-                Text = "blue",
+                Text = "Синя тема",
                 Font = newFile.Font
             };
             blueMode.MouseHover += (sender, eventArgs) =>
@@ -519,7 +531,7 @@ namespace TextEditor
             //Setting up the dark mode menu
             darkMode = new ToolStripMenuItem()
             {
-                Text = "dark",
+                Text = "тъмна тема",
                 Font = newFile.Font
             };
             darkMode.MouseHover += (sender, eventArgs) =>
@@ -568,7 +580,7 @@ namespace TextEditor
             //Setting up the light mode menu
             lightMode = new ToolStripMenuItem()
             {
-                Text = "light",
+                Text = "светла тема",
                 Font = newFile.Font
             };
             lightMode.MouseHover += (sender, eventArgs) =>
@@ -624,7 +636,7 @@ namespace TextEditor
             //Setting up the help menu
             helpMenu = new ToolStripMenuItem()
             {
-                Text = "About",
+                Text = "Относно",
                 Font = fileMenu.Font,
                 BackColor = fileMenu.BackColor
             };
@@ -644,8 +656,9 @@ namespace TextEditor
             //Setting up the information menu
             information = new ToolStripMenuItem()
             {
-                Text = "info",
-                Font = newFile.Font
+                Text = "информация",
+                Font = newFile.Font,
+                Image = Properties.Resources.infoMenu
             };
             information.MouseHover += (sender, eventArgs) =>
             {
