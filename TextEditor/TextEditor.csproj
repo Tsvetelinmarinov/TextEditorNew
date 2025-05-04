@@ -50,6 +50,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DarkModeMenuBackgroundRenderer.cs" />
+    <Compile Include="FontSettingsWindowGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InformationWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +140,60 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\newFile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\github.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copyDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cutDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deleteDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exitDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\infoDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\newFileDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\openDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pasteDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redoDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\restartDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\saveDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\selectDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\themeDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\undoDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fontAndColor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fontAndColorDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fontWindowIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

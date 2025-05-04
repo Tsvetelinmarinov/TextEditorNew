@@ -18,6 +18,8 @@ namespace TextEditor
             if (e.Item.Selected)
             {
                 Rectangle menu = new Rectangle(Point.Empty, e.Item.Size);
+                menu.Width--;
+                menu.Height--;
                 e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(100, 20, 50, 160)), menu);
 
                 using (Pen pen = new Pen(Color.DarkSlateGray))

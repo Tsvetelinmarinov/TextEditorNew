@@ -80,6 +80,9 @@ namespace TextEditor
         //Group of the menu 'appearance'
         private ToolStripMenuItem[] colorModeMenus = new ToolStripMenuItem[3];
 
+        //menu "font and color"
+        private ToolStripMenuItem fontAndColor;
+
         //menu 'information'
         private ToolStripMenuItem information;
 
@@ -139,7 +142,8 @@ namespace TextEditor
             menuBar = new MenuStrip()
             {
                 Bounds = new Rectangle(0, 0, this.Width, 30),
-                BackColor = Color.FromArgb(20, 10, 50, 220)
+                BackColor = Color.FromArgb(20, 10, 50, 220),
+                Cursor = Cursors.Hand
             };
             this.Controls.Add(menuBar);
             menuBar.Renderer = new MenuBackgroundRender();
@@ -148,7 +152,7 @@ namespace TextEditor
             fileMenu = new ToolStripMenuItem()
             {
                 Text = "Файл",
-                Font = new Font("Cascadia Code", 11),
+                Font = new Font("Seoge UI", 10),
                 BackColor = this.BackColor,
             };
             fileMenu.MouseHover += (sender, eventArgs) =>
@@ -169,7 +173,7 @@ namespace TextEditor
             newFile = new ToolStripMenuItem()
             {
                 Text = "нов файл",
-                Font = new Font("Seoge UI", 11),
+                Font = new Font("Seoge UI", 10),
                 Image = Properties.Resources.newFile
             };
             newFile.Click += (sender, eventArgs) => { new SystemEngine().CreateNewFile(editor); };
@@ -523,6 +527,26 @@ namespace TextEditor
                     blueMode,
                     darkMode,
                     lightMode,
+                    fontAndColor,
+                    information
+                );
+
+                new SystemEngine().SetBlueModeIcons
+                (
+                    newFile,
+                    open,
+                    save,
+                    reboot,
+                    exit,
+                    back,
+                    next,
+                    selectAll,
+                    cut,
+                    copy,
+                    paste,
+                    deleteAll,
+                    appearance,
+                    fontAndColor,
                     information
                 );
             };
@@ -572,7 +596,15 @@ namespace TextEditor
                     blueMode,
                     darkMode,
                     lightMode,
+                    fontAndColor,
                     information
+                );
+
+                new SystemEngine().SetDarkModeIcons
+                (
+                    newFile, open, save, reboot, exit,
+                    back, next, selectAll, cut, copy, paste, 
+                    deleteAll, appearance, fontAndColor, information
                 );
             };
             appearance.DropDownItems.Add(darkMode);
@@ -621,6 +653,26 @@ namespace TextEditor
                     blueMode,
                     darkMode,
                     lightMode,
+                    fontAndColor,
+                    information
+                );
+
+                new SystemEngine().SetLightModeIcons
+                (
+                    newFile,
+                    open,
+                    save,
+                    reboot,
+                    exit,
+                    back,
+                    next,
+                    selectAll,
+                    cut,
+                    copy,
+                    paste,
+                    deleteAll,
+                    appearance,
+                    fontAndColor,
                     information
                 );
             };
@@ -632,6 +684,27 @@ namespace TextEditor
             colorModeMenus[2] = lightMode;
 
             new SystemEngine().GroupMenuItems(colorModeMenus);
+
+            //Setting up the font and color menu
+            fontAndColor = new ToolStripMenuItem()
+            {
+                Text = "Шрифт и цвят",
+                Font = newFile.Font,
+                Image = Properties.Resources.fontAndColor
+            };
+            fontAndColor.MouseHover += (sender, eventArgs) =>
+            {
+                new ToolTip().Show
+                (
+                    "Опций за промяна на шрифта",
+                    this,
+                    PointToClient(Cursor.Position).X,
+                    PointToClient(Cursor.Position).Y,
+                    2500
+                );
+            };
+            fontAndColor.Click += (sender, eventArgs) => { new FontSettingsWindowGUI(); };
+            optionsMenu.DropDownItems.Add(fontAndColor);
 
             //Setting up the help menu
             helpMenu = new ToolStripMenuItem()

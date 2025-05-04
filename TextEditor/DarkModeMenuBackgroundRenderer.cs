@@ -22,7 +22,7 @@ namespace TextEditor
                 Rectangle menuItem = new Rectangle(Point.Empty, eventArgs.Item.Size);
                 menuItem.Width--;
                 menuItem.Height--;
-                eventArgs.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(255, 90, 90, 120)), menuItem);
+                eventArgs.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(155, 50, 50, 70)), menuItem);
 
                 using (Pen pen = new Pen(Color.GhostWhite))
                 {
