@@ -20,26 +20,19 @@ namespace TextEditor
         public void CreateNewFile(RichTextBox box)
         {
 
-            if (box.Text != null && box.Text != "")
-            {
-
-                if
+            if 
+            (
+                box.Text != null && 
+                box.Text != "" &&
+                MessageBox.Show
                 (
-                    MessageBox.Show
-                    (
-                        "Незапазените данни ще бъдат загубени. Искате ли да продължите?",
-                        "Текстов редактор",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question
-                    )
-                    == DialogResult.Yes
+                    "Незапазените данни ще бъдат загубени. Искате ли да продължите?",
+                    "Текстов редактор",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
                 )
-                {
-                    box.Clear();
-                }
-
-            }
-            else
+                == DialogResult.Yes
+            )
             {
                 box.Clear();
             }
@@ -53,47 +46,44 @@ namespace TextEditor
         public void LoadDataFromFile(RichTextBox box)
         {
 
-            if (box.Text != null && box.Text != "")
+            if 
+            (   
+               box.Text != null && 
+               box.Text != "" &&
+               MessageBox.Show
+               (
+                   "Незапазените данни ще бъдат загубени. Искате ли да продължите?",
+                   "Текстов редактор",
+                   MessageBoxButtons.YesNo,
+                   MessageBoxIcon.Question
+               )
+               == DialogResult.Yes
+            )
             {
 
-                if 
+                using
                 (
-                   MessageBox.Show
-                   (
-                       "Незапазените данни ще бъдат загубени. Искате ли да продължите?",
-                       "Текстов редактор",
-                       MessageBoxButtons.YesNo,
-                       MessageBoxIcon.Question
-                   )
-                   == DialogResult.Yes
+                    OpenFileDialog fileChooser = new OpenFileDialog()
+                    {
+                        Title = "Отваряне на файл",
+                        Filter =
+                        "Text Files (*.txt)|*.txt|" +
+                        "All Files (*.*)|*.*|" +
+                        "C# Files (*.cs)|*.cs|" +
+                        "C++ Files (*.cpp)|*.cpp|" +
+                        "HTML document (*.html)|*.html|" +
+                        "Stylesheet (*.css)|*.css|" +
+                        "JavaScript Files (*.js)|*.js",
+                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer),
+                        Multiselect = true,
+                        DefaultExt = "txt"
+                    }
                 )
                 {
 
-                    using 
-                    (
-                       OpenFileDialog fileChooser = new OpenFileDialog()
-                       {  
-                           Title = "Отваряне на файл",
-                           Filter = 
-                           "Text Files (*.txt)|*.txt|" +
-                           "All Files (*.*)|*.*|" +
-                           "C# Files (*.cs)|*.cs|" +
-                           "C++ Files (*.cpp)|*.cpp|" +
-                           "HTML document (*.html)|*.html|" +
-                           "Stylesheet (*.css)|*.css|" +
-                           "JavaScript Files (*.js)|*.js",
-                           InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer),
-                           Multiselect = true,
-                           DefaultExt = "txt"
-                       }
-                    )
+                    if (fileChooser.ShowDialog() == DialogResult.OK)
                     {
-
-                        if (fileChooser.ShowDialog() == DialogResult.OK)
-                        { 
-                            box.Text = File.ReadAllText(fileChooser.FileName);
-                        }
-
+                        box.Text = File.ReadAllText(fileChooser.FileName);
                     }
 
                 }
@@ -327,7 +317,7 @@ namespace TextEditor
             box.BackColor = Color.FromArgb(40, 40, 40);
             box.ForeColor = Color.GhostWhite;
 
-            menuBar.BackColor = Color.FromArgb(50, 50, 50);
+            menuBar.BackColor = Color.FromArgb(255, 35, 35, 35);
             menuBar.Renderer = new DarkModeMenuBackgroundRenderer();
 
             foreach (ToolStripMenuItem menu in menus)

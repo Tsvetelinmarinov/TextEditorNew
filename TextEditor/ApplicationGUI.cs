@@ -87,7 +87,7 @@ namespace TextEditor
         private ToolStripMenuItem information;
 
         //Text box - the editor
-        private RichTextBox editor;
+        public RichTextBox editor;
 
         //ToolTip for the menu bar and the menus
         private ToolTip tip = new ToolTip();
@@ -603,7 +603,7 @@ namespace TextEditor
                 new SystemEngine().SetDarkModeIcons
                 (
                     newFile, open, save, reboot, exit,
-                    back, next, selectAll, cut, copy, paste, 
+                    back, next, selectAll, cut, copy, paste,
                     deleteAll, appearance, fontAndColor, information
                 );
             };
@@ -703,7 +703,18 @@ namespace TextEditor
                     2500
                 );
             };
-            fontAndColor.Click += (sender, eventArgs) => { new FontSettingsWindowGUI(); };
+            fontAndColor.Click += (sender, eventArgs) => 
+            { 
+               FontSettingsWindowGUI settingsWin = new FontSettingsWindowGUI();
+               settingsWin.FontChanged += (newFont) =>
+               {
+                   editor.Font = newFont;
+               };
+               settingsWin.ForegroundOnChange += (newForeColor) =>
+               {
+                   editor.ForeColor = newForeColor;
+               };
+            };
             optionsMenu.DropDownItems.Add(fontAndColor);
 
             //Setting up the help menu
@@ -745,8 +756,10 @@ namespace TextEditor
                 );
             };
             information.Click += (sender, eventArgs) => { new InformationWindow(); };
-            helpMenu.DropDownItems.Add(information);
+            helpMenu.DropDownItems.Add(information);            
 
-        } 
+        }
+
     } 
+
 }
