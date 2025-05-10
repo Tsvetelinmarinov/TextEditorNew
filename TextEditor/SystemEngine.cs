@@ -5,10 +5,11 @@
  * All methods and voids for system-level functionality are defined here.
  */
 
-using System.Windows.Forms;
+using System;
 using System.Drawing;
 using System.IO;
-using System;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TextEditor
 {
@@ -277,18 +278,18 @@ namespace TextEditor
         /**
          * Change to dark mode
          */
-        public void ChangeToDarkMode
-        (
-            ApplicationGUI editor, RichTextBox box, MenuStrip menuBar, ToolStripMenuItem menu1,
+        public void ChangeToDarkMode(
+            ApplicationGUI editor, RichTextBox box, Panel boxPanel, MenuStrip menuBar, ToolStripMenuItem menu1,
             ToolStripMenuItem menu2, ToolStripMenuItem menu3, ToolStripMenuItem menu4, ToolStripMenuItem menu5,
             ToolStripMenuItem menu6, ToolStripMenuItem menu7, ToolStripMenuItem menu8, ToolStripMenuItem menu9,
             ToolStripMenuItem menu10, ToolStripMenuItem menu11, ToolStripMenuItem menu12, ToolStripMenuItem menu13,
             ToolStripMenuItem menu14, ToolStripMenuItem menu15, ToolStripMenuItem menu16, ToolStripMenuItem menu17,
-            ToolStripMenuItem menu18,  ToolStripMenuItem menu19, ToolStripMenuItem menu20, ToolStripMenuItem menu21,ToolStripMenuItem menu22
+            ToolStripMenuItem menu18, ToolStripMenuItem menu19, ToolStripMenuItem menu20, ToolStripMenuItem menu21,
+            ToolStripMenuItem menu22, ToolStripMenuItem menu23, ToolStripMenuItem menu24, ToolStripMenuItem menu25
         )
         {
 
-            ToolStripMenuItem[] menus = new ToolStripMenuItem[22];
+            ToolStripMenuItem[] menus = new ToolStripMenuItem[25];
             menus[0] = menu1;
             menus[1] = menu2;
             menus[2] = menu3;
@@ -311,8 +312,13 @@ namespace TextEditor
             menus[19] = menu20;
             menus[20] = menu21;
             menus[21] = menu22;
+            menus[22] = menu23;
+            menus[23] = menu24;
+            menus[24] = menu25;
+
 
             editor.BackColor = Color.FromArgb(255, 35, 35, 35);
+            boxPanel.BackColor = Color.FromArgb(140, 80, 80, 200);
 
             box.BackColor = Color.FromArgb(40, 40, 40);
             box.ForeColor = Color.GhostWhite;
@@ -332,17 +338,41 @@ namespace TextEditor
         /**
          * Change to original blue mode
          */
-        public void ChangeToBlueMode
-        (
-            ApplicationGUI editor,  RichTextBox box,  MenuStrip menuBar,  ToolStripMenuItem menu1, ToolStripMenuItem menu2, ToolStripMenuItem menu3,
-            ToolStripMenuItem menu4, ToolStripMenuItem menu5, ToolStripMenuItem menu6, ToolStripMenuItem menu7, ToolStripMenuItem menu8,
-            ToolStripMenuItem menu9, ToolStripMenuItem menu10, ToolStripMenuItem menu11, ToolStripMenuItem menu12, ToolStripMenuItem menu13,
-            ToolStripMenuItem menu14, ToolStripMenuItem menu15, ToolStripMenuItem menu16, ToolStripMenuItem menu17, ToolStripMenuItem menu18,
-            ToolStripMenuItem menu19, ToolStripMenuItem menu20, ToolStripMenuItem menu21, ToolStripMenuItem menu22
+        public void ChangeToBlueMode(
+            ApplicationGUI editor,  
+            RichTextBox box,
+            Panel boxPanel,
+            MenuStrip menuBar, 
+            ToolStripMenuItem menu1, 
+            ToolStripMenuItem menu2, 
+            ToolStripMenuItem menu3,
+            ToolStripMenuItem menu4,
+            ToolStripMenuItem menu5, 
+            ToolStripMenuItem menu6, 
+            ToolStripMenuItem menu7,
+            ToolStripMenuItem menu8,
+            ToolStripMenuItem menu9, 
+            ToolStripMenuItem menu10, 
+            ToolStripMenuItem menu11, 
+            ToolStripMenuItem menu12, 
+            ToolStripMenuItem menu13,
+            ToolStripMenuItem menu14, 
+            ToolStripMenuItem menu15, 
+            ToolStripMenuItem menu16,
+            ToolStripMenuItem menu17,
+            ToolStripMenuItem menu18,
+            ToolStripMenuItem menu19, 
+            ToolStripMenuItem menu20,
+            ToolStripMenuItem menu21,
+            ToolStripMenuItem menu22,
+            ToolStripMenuItem menu23, 
+            ToolStripMenuItem menu24, 
+            ToolStripMenuItem menu25
         )
         {
 
             editor.BackColor = Color.GhostWhite;
+            boxPanel.BackColor = Color.FromArgb(140, 80, 80, 200);
 
             menuBar.BackColor = Color.FromArgb(20, 10, 50, 220);
             menuBar.Renderer = new MenuBackgroundRender();
@@ -352,9 +382,10 @@ namespace TextEditor
 
             ToolStripMenuItem[] menus =
             {
-                menu1, menu2, menu3, menu4, menu5, menu6, menu7, menu8, menu9,
-                menu10, menu11, menu12, menu13, menu14, menu15, menu16,
-                menu17, menu18, menu19, menu20, menu21, menu22
+                menu1, menu2, menu3, menu4, menu5, menu6, menu7, menu8, 
+                menu9, menu10, menu11, menu12, menu13, menu14, menu15, 
+                menu16, menu17, menu18, menu19, menu20, menu21, menu22, 
+                menu23, menu24, menu25
             };
 
             foreach (var menu in menus)
@@ -369,17 +400,19 @@ namespace TextEditor
         /**
          * Switch to light mode
          */
-        public void ChangeToLightMode
-        (
-            ApplicationGUI editor, RichTextBox box, MenuStrip menuBar, ToolStripMenuItem menu1, ToolStripMenuItem menu2, ToolStripMenuItem menu3,
-            ToolStripMenuItem menu4, ToolStripMenuItem menu5, ToolStripMenuItem menu6, ToolStripMenuItem menu7, ToolStripMenuItem menu8, 
-            ToolStripMenuItem menu9, ToolStripMenuItem menu10, ToolStripMenuItem menu11, ToolStripMenuItem menu12, ToolStripMenuItem menu13, 
-            ToolStripMenuItem menu14, ToolStripMenuItem menu15, ToolStripMenuItem menu16, ToolStripMenuItem menu17, ToolStripMenuItem menu18, 
-            ToolStripMenuItem menu19, ToolStripMenuItem menu20, ToolStripMenuItem menu21, ToolStripMenuItem menu22
+        public void ChangeToLightMode(
+            ApplicationGUI editor, RichTextBox box, Panel boxPanel, MenuStrip menuBar, ToolStripMenuItem menu1, 
+            ToolStripMenuItem menu2, ToolStripMenuItem menu3, ToolStripMenuItem menu4, ToolStripMenuItem menu5, 
+            ToolStripMenuItem menu6, ToolStripMenuItem menu7, ToolStripMenuItem menu8,  ToolStripMenuItem menu9,
+            ToolStripMenuItem menu10, ToolStripMenuItem menu11, ToolStripMenuItem menu12, ToolStripMenuItem menu13,
+            ToolStripMenuItem menu14, ToolStripMenuItem menu15, ToolStripMenuItem menu16, ToolStripMenuItem menu17,
+            ToolStripMenuItem menu18,   ToolStripMenuItem menu19, ToolStripMenuItem menu20, ToolStripMenuItem menu21,
+            ToolStripMenuItem menu22, ToolStripMenuItem menu23,ToolStripMenuItem menu24, ToolStripMenuItem menu25
         )
         {
 
             editor.BackColor = Color.White;
+            boxPanel.BackColor = Color.FromArgb(60, 100, 60, 100);
 
             box.BackColor = Color.GhostWhite;
             box.ForeColor = Color.FromArgb(60, 60, 60);
@@ -391,7 +424,8 @@ namespace TextEditor
             {
                 menu1, menu2, menu3, menu4, menu5, menu6, menu7, menu8, menu9,
                 menu10, menu11, menu12, menu13, menu14, menu15, menu16,
-                menu17, menu18, menu19, menu20, menu21, menu22
+                menu17, menu18, menu19, menu20, menu21, menu22, menu23,
+                menu24, menu25
             };
 
             foreach (ToolStripMenuItem menu in menus)
@@ -405,30 +439,33 @@ namespace TextEditor
         /**
          * Change the icons for the blue mode
          */
-        public void SetBlueModeIcons
-        (
+        public void SetBlueModeIcons(
             ToolStripMenuItem menu1, ToolStripMenuItem menu2, ToolStripMenuItem menu3, ToolStripMenuItem menu4,
             ToolStripMenuItem menu5, ToolStripMenuItem menu6, ToolStripMenuItem menu7, ToolStripMenuItem menu8,
             ToolStripMenuItem menu9, ToolStripMenuItem menu10, ToolStripMenuItem menu11, ToolStripMenuItem menu12,
-            ToolStripMenuItem menu13, ToolStripMenuItem menu14, ToolStripMenuItem menu15
+            ToolStripMenuItem menu13, ToolStripMenuItem menu14, ToolStripMenuItem menu15, ToolStripMenuItem menu16,
+            ToolStripMenuItem menu17, ToolStripMenuItem menu18
         )
         {
 
             menu1.Image = Properties.Resources.newFile;
-            menu2.Image = Properties.Resources.open;
-            menu3.Image = Properties.Resources.save;
-            menu4.Image = Properties.Resources.restart;
-            menu5.Image = Properties.Resources.exit;
-            menu6.Image = Properties.Resources.undo;
-            menu7.Image = Properties.Resources.redo;
-            menu8.Image = Properties.Resources.select;
-            menu9.Image = Properties.Resources.cut;
-            menu10.Image = Properties.Resources.copy;
-            menu11.Image = Properties.Resources.paste;
-            menu12.Image = Properties.Resources.delete;
-            menu13.Image = Properties.Resources.theme;
-            menu14.Image = Properties.Resources.fontAndColor;
-            menu15.Image = Properties.Resources.infoMenu;
+            menu2.Image = Properties.Resources.newWindow;
+            menu3.Image = Properties.Resources.open;
+            menu4.Image = Properties.Resources.save;
+            menu5.Image = Properties.Resources.restart;
+            menu6.Image = Properties.Resources.exit;
+            menu7.Image = Properties.Resources.undo;
+            menu8.Image = Properties.Resources.redo;
+            menu9.Image = Properties.Resources.select;
+            menu10.Image = Properties.Resources.cut;
+            menu11.Image = Properties.Resources.copy;
+            menu12.Image = Properties.Resources.paste;
+            menu13.Image = Properties.Resources.delete;
+            menu14.Image = Properties.Resources.uppercase;
+            menu15.Image = Properties.Resources.lowercase;
+            menu16.Image = Properties.Resources.theme;
+            menu17.Image = Properties.Resources.fontAndColor;
+            menu18.Image = Properties.Resources.infoMenu;
 
         }
 
@@ -436,30 +473,33 @@ namespace TextEditor
         /**
          * Change the icons for the light mode
          */
-        public void SetLightModeIcons
-        (
+        public void SetLightModeIcons(
             ToolStripMenuItem menu1, ToolStripMenuItem menu2, ToolStripMenuItem menu3, ToolStripMenuItem menu4,
             ToolStripMenuItem menu5, ToolStripMenuItem menu6, ToolStripMenuItem menu7, ToolStripMenuItem menu8,
             ToolStripMenuItem menu9, ToolStripMenuItem menu10, ToolStripMenuItem menu11, ToolStripMenuItem menu12,
-            ToolStripMenuItem menu13, ToolStripMenuItem menu14, ToolStripMenuItem menu15
+            ToolStripMenuItem menu13, ToolStripMenuItem menu14, ToolStripMenuItem menu15, ToolStripMenuItem menu16,
+            ToolStripMenuItem menu17, ToolStripMenuItem menu18
         )
         {
 
             menu1.Image = Properties.Resources.newFile;
-            menu2.Image = Properties.Resources.open;
-            menu3.Image = Properties.Resources.save;
-            menu4.Image = Properties.Resources.restart;
-            menu5.Image = Properties.Resources.exit;
-            menu6.Image = Properties.Resources.undo;
-            menu7.Image = Properties.Resources.redo;
-            menu8.Image = Properties.Resources.select;
-            menu9.Image = Properties.Resources.cut;
-            menu10.Image = Properties.Resources.copy;
-            menu11.Image = Properties.Resources.paste;
-            menu12.Image = Properties.Resources.delete;
-            menu13.Image = Properties.Resources.theme;
-            menu14.Image = Properties.Resources.fontAndColor;
-            menu15.Image = Properties.Resources.infoMenu;
+            menu2.Image = Properties.Resources.newWindow;
+            menu3.Image = Properties.Resources.open;
+            menu4.Image = Properties.Resources.save;
+            menu5.Image = Properties.Resources.restart;
+            menu6.Image = Properties.Resources.exit;
+            menu7.Image = Properties.Resources.undo;
+            menu8.Image = Properties.Resources.redo;
+            menu9.Image = Properties.Resources.select;
+            menu10.Image = Properties.Resources.cut;
+            menu11.Image = Properties.Resources.copy;
+            menu12.Image = Properties.Resources.paste;
+            menu13.Image = Properties.Resources.delete;
+            menu14.Image = Properties.Resources.uppercase;
+            menu15.Image = Properties.Resources.lowercase;
+            menu16.Image = Properties.Resources.theme;
+            menu17.Image = Properties.Resources.fontAndColor;
+            menu18.Image = Properties.Resources.infoMenu;
 
         }
 
@@ -467,30 +507,33 @@ namespace TextEditor
         /**
          * Change the icons for the dark mode
          */
-        public void SetDarkModeIcons
-        (
+        public void SetDarkModeIcons(
             ToolStripMenuItem menu1, ToolStripMenuItem menu2, ToolStripMenuItem menu3, ToolStripMenuItem menu4,
             ToolStripMenuItem menu5, ToolStripMenuItem menu6, ToolStripMenuItem menu7, ToolStripMenuItem menu8, 
             ToolStripMenuItem menu9, ToolStripMenuItem menu10, ToolStripMenuItem menu11, ToolStripMenuItem menu12,
-            ToolStripMenuItem menu13, ToolStripMenuItem menu14, ToolStripMenuItem menu15
+            ToolStripMenuItem menu13, ToolStripMenuItem menu14, ToolStripMenuItem menu15, ToolStripMenuItem menu16,
+            ToolStripMenuItem menu17, ToolStripMenuItem menu18
         ) 
         {
 
             menu1.Image = Properties.Resources.newFileDark;
-            menu2.Image = Properties.Resources.openDark;
-            menu3.Image = Properties.Resources.saveDark;
-            menu4.Image = Properties.Resources.restartDark;
-            menu5.Image = Properties.Resources.exitDark;
-            menu6.Image = Properties.Resources.undoDark;
-            menu7.Image = Properties.Resources.redoDark;
-            menu8.Image = Properties.Resources.selectDark;
-            menu9.Image = Properties.Resources.cutDark;
-            menu10.Image = Properties.Resources.copyDark;
-            menu11.Image = Properties.Resources.pasteDark;
-            menu12.Image = Properties.Resources.deleteDark;
-            menu13.Image = Properties.Resources.themeDark;
-            menu14.Image = Properties.Resources.fontAndColorDark;
-            menu15.Image = Properties.Resources.infoDark;
+            menu2.Image = Properties.Resources.newWindowDark;
+            menu3.Image = Properties.Resources.openDark;
+            menu4.Image = Properties.Resources.saveDark;
+            menu5.Image = Properties.Resources.restartDark;
+            menu6.Image = Properties.Resources.exitDark;
+            menu7.Image = Properties.Resources.undoDark;
+            menu8.Image = Properties.Resources.redoDark;
+            menu9.Image = Properties.Resources.selectDark;
+            menu10.Image = Properties.Resources.cutDark;
+            menu11.Image = Properties.Resources.copyDark;
+            menu12.Image = Properties.Resources.pasteDark;
+            menu13.Image = Properties.Resources.deleteDark;
+            menu14.Image = Properties.Resources.uppercaseDark;
+            menu15.Image = Properties.Resources.lowercaseDark;
+            menu16.Image = Properties.Resources.themeDark;
+            menu17.Image = Properties.Resources.fontAndColorDark;
+            menu18.Image = Properties.Resources.infoDark;
 
         }
 

@@ -169,11 +169,23 @@
   <data name="infoMenu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\infoMenu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="lowercase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lowercase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lowercaseDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lowercaseDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="newFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\newFile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="newFileDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\newFileDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="newWindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\newWindow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="newWindowDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\newWindowDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="open" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -222,5 +234,11 @@
   </data>
   <data name="undoDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\undoDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uppercase" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uppercase.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="uppercaseDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uppercaseDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

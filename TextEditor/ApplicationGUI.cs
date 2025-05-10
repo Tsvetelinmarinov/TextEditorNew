@@ -38,6 +38,9 @@ namespace TextEditor
         //menu 'new file'
         private ToolStripMenuItem newFile;
 
+        //menu 'new window'
+        private ToolStripMenuItem newWindow;
+
         //menu 'restart'
         private ToolStripMenuItem reboot;
 
@@ -64,6 +67,12 @@ namespace TextEditor
 
         //menu 'delete all'
         private ToolStripMenuItem deleteAll;
+
+        //Menu 'make uppercase'
+        private ToolStripMenuItem uppercase;
+
+        //Menu 'lowercase'
+        private ToolStripMenuItem lowercase;
 
         //menu 'appearance'
         private ToolStripMenuItem appearance;
@@ -110,10 +119,7 @@ namespace TextEditor
             this.Icon = Properties.Resources.icon;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.BackColor = Color.GhostWhite;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimumSize = this.Size;
-            this.MaximumSize = this.Size;
+            this.FormBorderStyle = FormBorderStyle.Sizable;
 
         }
 
@@ -124,11 +130,21 @@ namespace TextEditor
         private void BuildGUI()
         {
 
-            //Setting up the text box
+            // Setting up the panel for the editor
+            Panel textAreaPanel = new Panel()
+            {
+                Bounds = new Rectangle(-1, 55, 1280, 605),
+                BackColor = Color.FromArgb(140, 80, 80, 200), // Border color
+                Padding = new Padding(1),// Thickness of the border
+                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
+            };
+            Controls.Add(textAreaPanel);
+
+            // Setting up the text box
             editor = new RichTextBox()
             {
-                Bounds = new Rectangle(0, 55, 1280, 605),
-                BorderStyle = BorderStyle.None,
+                Dock = DockStyle.Fill,
+                BorderStyle = BorderStyle.None, // Remove default border
                 Font = new Font("Cascadia Code", 14),
                 ForeColor = Color.FromArgb(255, 50, 50, 50),
                 BackColor = Color.White,
@@ -136,12 +152,12 @@ namespace TextEditor
                 ScrollBars = RichTextBoxScrollBars.Both,
                 WordWrap = false
             };
-            this.Controls.Add(editor);
+            textAreaPanel.Controls.Add(editor);
 
             //Setting up the menu bar
             menuBar = new MenuStrip()
             {
-                Bounds = new Rectangle(0, 0, this.Width, 30),
+                Bounds = new Rectangle(0, 0, this.Width, 20),
                 BackColor = Color.FromArgb(20, 10, 50, 220),
                 Cursor = Cursors.Hand
             };
@@ -152,7 +168,7 @@ namespace TextEditor
             fileMenu = new ToolStripMenuItem()
             {
                 Text = "Файл",
-                Font = new Font("Seoge UI", 10),
+                Font = new Font("Seoge UI", 11),
                 BackColor = this.BackColor,
             };
             fileMenu.MouseHover += (sender, eventArgs) =>
@@ -173,7 +189,7 @@ namespace TextEditor
             newFile = new ToolStripMenuItem()
             {
                 Text = "нов файл",
-                Font = new Font("Seoge UI", 10),
+                Font = new Font("Seoge UI", 11),
                 Image = Properties.Resources.newFile
             };
             newFile.Click += (sender, eventArgs) => { new SystemEngine().CreateNewFile(editor); };
@@ -190,6 +206,27 @@ namespace TextEditor
                 );
             };
             fileMenu.DropDownItems.Add(newFile);
+
+            //menu 'new window'
+            newWindow = new ToolStripMenuItem()
+            {
+                Text = "нов прозорец",
+                Font = newFile.Font,
+                Image = Properties.Resources.newWindow
+            };
+            newWindow.MouseHover += (sender, eventArgs) =>
+            {
+                tip.Show
+                (
+                    "отваряне на нов прозорец",
+                    this,
+                    PointToClient(Cursor.Position).X,
+                    PointToClient(Cursor.Position).Y,
+                    2000
+                );
+            };
+            newWindow.Click += (sender, eventArgs) => { new ApplicationGUI().Show(); };
+            fileMenu.DropDownItems.Add(newWindow);
 
             //Setting up the open menu
             open = new ToolStripMenuItem()
@@ -443,6 +480,48 @@ namespace TextEditor
             deleteAll.Click += (sender, eventArgs) => { editor.Clear(); };
             editMenu.DropDownItems.Add(deleteAll);
 
+            //menu 'uppercase'
+            uppercase = new ToolStripMenuItem()
+            {
+                Text = "само главни букви",
+                Font = newFile.Font,
+                Image = Properties.Resources.uppercase
+            };
+            uppercase.MouseHover += (sender, eventArgs) =>
+            {
+                new ToolTip().Show
+                (
+                    "Преработване на селектирания текст така, че да бъде само от главни букви",
+                    this,
+                    PointToClient(Cursor.Position).X,
+                    PointToClient(Cursor.Position).Y,
+                    3000
+                );
+            };
+            uppercase.Click += (sender, eventArgs) => { editor.Text = editor.Text?.ToUpper(); };
+            editMenu.DropDownItems.Add(uppercase);
+
+            //menu 'lowercase'
+            lowercase = new ToolStripMenuItem()
+            {
+                Text = "само малки букви",
+                Font = newFile.Font,
+                Image = Properties.Resources.lowercase
+            };
+            lowercase.MouseHover += (sender, eventArgs) =>
+            {
+                new ToolTip().Show
+                (
+                    "Преработване на селектирания текст така, че да бъде само от малки букви",
+                    this,
+                    PointToClient(Cursor.Position).X,
+                    PointToClient(Cursor.Position).Y,
+                    3000
+                );
+            };
+            lowercase.Click += (sender, eventArgs) => { editor.Text = editor.Text?.ToLower(); };
+            editMenu.DropDownItems.Add(lowercase);
+
             //Settin up the options menu
             optionsMenu = new ToolStripMenuItem()
             {
@@ -466,7 +545,7 @@ namespace TextEditor
             //Setting up the appearance menu
             appearance = new ToolStripMenuItem()
             {
-                Text = "изглед",
+                Text = "тема",
                 Font = newFile.Font,
                 Image = Properties.Resources.theme
             };
@@ -486,7 +565,7 @@ namespace TextEditor
             //Setting up the blue mode menu
             blueMode = new ToolStripMenuItem()
             {
-                Text = "Синя тема",
+                Text = "синя тема",
                 Font = newFile.Font
             };
             blueMode.MouseHover += (sender, eventArgs) =>
@@ -506,12 +585,14 @@ namespace TextEditor
                 (
                     this,
                     editor,
+                    textAreaPanel,
                     menuBar,
                     fileMenu,
                     editMenu,
                     optionsMenu,
                     helpMenu,
                     newFile,
+                    newWindow,
                     open,
                     save,
                     reboot,
@@ -523,6 +604,8 @@ namespace TextEditor
                     copy,
                     paste,
                     deleteAll,
+                    uppercase,
+                    lowercase,
                     appearance,
                     blueMode,
                     darkMode,
@@ -534,6 +617,7 @@ namespace TextEditor
                 new SystemEngine().SetBlueModeIcons
                 (
                     newFile,
+                    newWindow,
                     open,
                     save,
                     reboot,
@@ -545,6 +629,8 @@ namespace TextEditor
                     copy,
                     paste,
                     deleteAll,
+                    uppercase,
+                    lowercase,
                     appearance,
                     fontAndColor,
                     information
@@ -575,12 +661,14 @@ namespace TextEditor
                 (
                     this,
                     editor,
+                    textAreaPanel,
                     menuBar,
                     fileMenu,
                     editMenu,
                     optionsMenu,
                     helpMenu,
                     newFile,
+                    newWindow,
                     open,
                     save,
                     reboot,
@@ -592,6 +680,8 @@ namespace TextEditor
                     copy,
                     paste,
                     deleteAll,
+                    uppercase,
+                    lowercase,
                     appearance,
                     blueMode,
                     darkMode,
@@ -602,9 +692,10 @@ namespace TextEditor
 
                 new SystemEngine().SetDarkModeIcons
                 (
-                    newFile, open, save, reboot, exit,
+                    newFile, newWindow, open, save, reboot, exit,
                     back, next, selectAll, cut, copy, paste,
-                    deleteAll, appearance, fontAndColor, information
+                    deleteAll, uppercase, lowercase, appearance,
+                    fontAndColor, information
                 );
             };
             appearance.DropDownItems.Add(darkMode);
@@ -632,12 +723,14 @@ namespace TextEditor
                 (
                     this,
                     editor,
+                    textAreaPanel,
                     menuBar,
                     fileMenu,
                     editMenu,
                     optionsMenu,
                     helpMenu,
                     newFile,
+                    newWindow,
                     open,
                     save,
                     reboot,
@@ -649,6 +742,8 @@ namespace TextEditor
                     paste,
                     selectAll,
                     deleteAll,
+                    uppercase,
+                    lowercase,
                     appearance,
                     blueMode,
                     darkMode,
@@ -660,6 +755,7 @@ namespace TextEditor
                 new SystemEngine().SetLightModeIcons
                 (
                     newFile,
+                    newWindow,
                     open,
                     save,
                     reboot,
@@ -671,6 +767,8 @@ namespace TextEditor
                     copy,
                     paste,
                     deleteAll,
+                    uppercase,
+                    lowercase,
                     appearance,
                     fontAndColor,
                     information
@@ -706,14 +804,8 @@ namespace TextEditor
             fontAndColor.Click += (sender, eventArgs) => 
             { 
                FontSettingsWindowGUI settingsWin = new FontSettingsWindowGUI();
-               settingsWin.FontChanged += (newFont) =>
-               {
-                   editor.Font = newFont;
-               };
-               settingsWin.ForegroundOnChange += (newForeColor) =>
-               {
-                   editor.ForeColor = newForeColor;
-               };
+               settingsWin.FontChanged += (newFont) => { editor.Font = newFont; };
+               settingsWin.ForegroundOnChange += (newForeColor) => { editor.ForeColor = newForeColor; };
             };
             optionsMenu.DropDownItems.Add(fontAndColor);
 

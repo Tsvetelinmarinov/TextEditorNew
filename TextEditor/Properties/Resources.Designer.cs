@@ -233,6 +233,26 @@ namespace TextEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap lowercase {
+            get {
+                object obj = ResourceManager.GetObject("lowercase", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lowercaseDark {
+            get {
+                object obj = ResourceManager.GetObject("lowercaseDark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap newFile {
             get {
                 object obj = ResourceManager.GetObject("newFile", resourceCulture);
@@ -246,6 +266,26 @@ namespace TextEditor.Properties {
         internal static System.Drawing.Bitmap newFileDark {
             get {
                 object obj = ResourceManager.GetObject("newFileDark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap newWindow {
+            get {
+                object obj = ResourceManager.GetObject("newWindow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap newWindowDark {
+            get {
+                object obj = ResourceManager.GetObject("newWindowDark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -406,6 +446,26 @@ namespace TextEditor.Properties {
         internal static System.Drawing.Bitmap undoDark {
             get {
                 object obj = ResourceManager.GetObject("undoDark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap uppercase {
+            get {
+                object obj = ResourceManager.GetObject("uppercase", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap uppercaseDark {
+            get {
+                object obj = ResourceManager.GetObject("uppercaseDark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
