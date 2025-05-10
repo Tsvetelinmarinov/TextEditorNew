@@ -171,18 +171,6 @@ namespace TextEditor
                 Font = new Font("Seoge UI", 11),
                 BackColor = this.BackColor,
             };
-            fileMenu.MouseHover += (sender, eventArgs) =>
-            {
-                Point currentCursorPosition = this.PointToClient(Cursor.Position);
-                tip.Show
-                (
-                    "Опций за файлове",
-                    this,
-                    currentCursorPosition.X,
-                    currentCursorPosition.Y,
-                    1000
-                );
-            };
             menuBar.Items.Add(fileMenu);
 
             //Setting up the new file menu
@@ -193,18 +181,6 @@ namespace TextEditor
                 Image = Properties.Resources.newFile
             };
             newFile.Click += (sender, eventArgs) => { new SystemEngine().CreateNewFile(editor); };
-            newFile.MouseHover += (sender, eventArgs) =>
-            {
-                Point currentCursorPosition = this.PointToClient(Cursor.Position);
-                tip.Show
-                (
-                    "Създаване на нов файл",
-                    this,
-                    currentCursorPosition.X,
-                    currentCursorPosition.Y,
-                    1500
-                );
-            };
             fileMenu.DropDownItems.Add(newFile);
 
             //menu 'new window'
@@ -213,17 +189,6 @@ namespace TextEditor
                 Text = "нов прозорец",
                 Font = newFile.Font,
                 Image = Properties.Resources.newWindow
-            };
-            newWindow.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "отваряне на нов прозорец",
-                    this,
-                    PointToClient(Cursor.Position).X,
-                    PointToClient(Cursor.Position).Y,
-                    2000
-                );
             };
             newWindow.Click += (sender, eventArgs) => { new ApplicationGUI().Show(); };
             fileMenu.DropDownItems.Add(newWindow);
@@ -236,18 +201,6 @@ namespace TextEditor
                 Image = Properties.Resources.open
             };
             open.Click += (sender, eventArgs) => { new SystemEngine().LoadDataFromFile(editor); };
-            open.MouseHover += (sender, eventArgs) =>
-            {
-                Point currentCursorLocation = this.PointToClient(Cursor.Position);
-                tip.Show
-                (
-                    "Отваряне на файл",
-                    this,
-                    currentCursorLocation.X,
-                    currentCursorLocation.Y,
-                    1500
-                );
-            };
             fileMenu.DropDownItems.Add(open);
 
             //Setting up the save menu
@@ -256,17 +209,6 @@ namespace TextEditor
                 Text = "запиши",
                 Font = newFile.Font,
                 Image = Properties.Resources.save
-            };
-            save.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "Запазване на файл",
-                    this,
-                    this.PointToClient(Cursor.Position).X,
-                    this.PointToClient(Cursor.Position).Y,
-                    1500
-                );
             };
             save.Click += (sender, eventArgs) => { new SystemEngine().ExportDataToLocalFile(editor); };
             fileMenu.DropDownItems.Add(save);
@@ -278,17 +220,6 @@ namespace TextEditor
                 Font = newFile.Font,
                 Image = Properties.Resources.restart
             };
-            reboot.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "Рестартитане на приложението",
-                    this,
-                    this.PointToClient(Cursor.Position).X,
-                    this.PointToClient(Cursor.Position).Y,
-                    1500
-                );
-            };
             reboot.Click += (sender, eventArgs) => { new SystemEngine().Reboot(editor); };
             fileMenu.DropDownItems.Add(reboot);
 
@@ -298,17 +229,6 @@ namespace TextEditor
                 Text = "изход",
                 Font = newFile.Font,
                 Image = Properties.Resources.exit
-            };
-            exit.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "Изход от приложението",
-                    this,
-                    this.PointToClient(Cursor.Position).X,
-                    this.PointToClient(Cursor.Position).Y,
-                    1500
-                );
             };
             exit.Click += (sender, eventArgs) => { new SystemEngine().Quit(editor); };
             fileMenu.DropDownItems.Add(exit);
@@ -320,17 +240,6 @@ namespace TextEditor
                 Font = fileMenu.Font,
                 BackColor = fileMenu.BackColor
             };
-            editMenu.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "Опций за редактиране",
-                    this,
-                    this.PointToClient(Cursor.Position).X,
-                    this.PointToClient(Cursor.Position).Y,
-                    1500
-                );
-            };
             menuBar.Items.Add(editMenu);
 
             //Setting up the undo menu
@@ -339,17 +248,6 @@ namespace TextEditor
                 Text = "предишна стъпка",
                 Font = newFile.Font,
                 Image = Properties.Resources.undo
-            };
-            back.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "Връщане назад",
-                    this,
-                    this.PointToClient(Cursor.Position).X,
-                    this.PointToClient(Cursor.Position).Y,
-                    1500
-                );
             };
             back.Click += (sender, eventArgs) => { editor.Undo(); };
             editMenu.DropDownItems.Add(back);
@@ -361,17 +259,6 @@ namespace TextEditor
                 Font = newFile.Font,
                 Image = Properties.Resources.redo
             };
-            next.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "Следваща стъпка",
-                    this,
-                    this.PointToClient(Cursor.Position).X,
-                    this.PointToClient(Cursor.Position).Y,
-                    1500
-                );
-            };
             next.Click += (sender, eventArgs) => { editor.Redo(); };
             editMenu.DropDownItems.Add(next);
 
@@ -381,17 +268,6 @@ namespace TextEditor
                 Text = "селектирай всичко",
                 Font = newFile.Font,
                 Image = Properties.Resources.select
-            };
-            selectAll.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "Избиране на всичко",
-                    this,
-                    this.PointToClient(Cursor.Position).X,
-                    this.PointToClient(Cursor.Position).Y,
-                    1500
-                );
             };
             selectAll.Click += (sender, eventArgs) => { editor.SelectAll(); };
             editMenu.DropDownItems.Add(selectAll);
@@ -403,17 +279,6 @@ namespace TextEditor
                 Font = newFile.Font,
                 Image = Properties.Resources.cut
             };
-            cut.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "Изрязване",
-                    this,
-                    this.PointToClient(Cursor.Position).X,
-                    this.PointToClient(Cursor.Position).Y,
-                    1500
-                );
-            };
             cut.Click += (sender, eventArgs) => { editor.Cut(); };
             editMenu.DropDownItems.Add(cut);
 
@@ -423,17 +288,6 @@ namespace TextEditor
                 Text = "копиране",
                 Font = newFile.Font,
                 Image = Properties.Resources.copy
-            };
-            copy.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "Копиране",
-                    this,
-                    this.PointToClient(Cursor.Position).X,
-                    this.PointToClient(Cursor.Position).Y,
-                    1500
-                );
             };
             copy.Click += (sender, eventArgs) => { editor.Copy(); };
             editMenu.DropDownItems.Add(copy);
@@ -445,17 +299,6 @@ namespace TextEditor
                 Font = newFile.Font,
                 Image = Properties.Resources.paste
             };
-            paste.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "Поставяне",
-                    this,
-                    this.PointToClient(Cursor.Position).X,
-                    this.PointToClient(Cursor.Position).Y,
-                    1500
-                );
-            };
             paste.Click += (sender, eventArgs) => { editor.Paste(); };
             editMenu.DropDownItems.Add(paste);
 
@@ -465,18 +308,7 @@ namespace TextEditor
                 Text = "изтриване на всичко",
                 Font = newFile.Font,
                 Image = Properties.Resources.delete
-            };
-            deleteAll.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "Изтриване на всичко",
-                    this,
-                    PointToClient(Cursor.Position).X,
-                    PointToClient(Cursor.Position).Y,
-                    1500
-                );
-            };
+            }; 
             deleteAll.Click += (sender, eventArgs) => { editor.Clear(); };
             editMenu.DropDownItems.Add(deleteAll);
 
@@ -486,17 +318,6 @@ namespace TextEditor
                 Text = "само главни букви",
                 Font = newFile.Font,
                 Image = Properties.Resources.uppercase
-            };
-            uppercase.MouseHover += (sender, eventArgs) =>
-            {
-                new ToolTip().Show
-                (
-                    "Преработване на селектирания текст така, че да бъде само от главни букви",
-                    this,
-                    PointToClient(Cursor.Position).X,
-                    PointToClient(Cursor.Position).Y,
-                    3000
-                );
             };
             uppercase.Click += (sender, eventArgs) => { editor.Text = editor.Text?.ToUpper(); };
             editMenu.DropDownItems.Add(uppercase);
@@ -508,17 +329,6 @@ namespace TextEditor
                 Font = newFile.Font,
                 Image = Properties.Resources.lowercase
             };
-            lowercase.MouseHover += (sender, eventArgs) =>
-            {
-                new ToolTip().Show
-                (
-                    "Преработване на селектирания текст така, че да бъде само от малки букви",
-                    this,
-                    PointToClient(Cursor.Position).X,
-                    PointToClient(Cursor.Position).Y,
-                    3000
-                );
-            };
             lowercase.Click += (sender, eventArgs) => { editor.Text = editor.Text?.ToLower(); };
             editMenu.DropDownItems.Add(lowercase);
 
@@ -529,17 +339,6 @@ namespace TextEditor
                 Font = fileMenu.Font,
                 BackColor = fileMenu.BackColor
             };
-            optionsMenu.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "Опций за настройки",
-                    this,
-                    PointToClient(Cursor.Position).X,
-                    PointToClient(Cursor.Position).Y,
-                    1500
-                );
-            };
             menuBar.Items.Add(optionsMenu);
 
             //Setting up the appearance menu
@@ -549,17 +348,6 @@ namespace TextEditor
                 Font = newFile.Font,
                 Image = Properties.Resources.theme
             };
-            appearance.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "Избор на тема",
-                    this,
-                    PointToClient(Cursor.Position).X,
-                    PointToClient(Cursor.Position).Y,
-                    1500
-                );
-            };
             optionsMenu.DropDownItems.Add(appearance);
 
             //Setting up the blue mode menu
@@ -567,17 +355,6 @@ namespace TextEditor
             {
                 Text = "синя тема",
                 Font = newFile.Font
-            };
-            blueMode.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "оригинална синя тема",
-                    this,
-                    PointToClient(Cursor.Position).X,
-                    PointToClient(Cursor.Position).Y,
-                    1500
-                );
             };
             blueMode.Click += (sender, eventArgs) =>
             {
@@ -644,17 +421,6 @@ namespace TextEditor
                 Text = "тъмна тема",
                 Font = newFile.Font
             };
-            darkMode.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "тъмен режим",
-                    this,
-                    PointToClient(Cursor.Position).X,
-                    PointToClient(Cursor.Position).Y,
-                    1500
-                );
-            };
             darkMode.Click += (sender, eventArgs) =>
             {
                 new SystemEngine().ChangeToDarkMode
@@ -705,17 +471,6 @@ namespace TextEditor
             {
                 Text = "светла тема",
                 Font = newFile.Font
-            };
-            lightMode.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "светъл режим",
-                    this,
-                    PointToClient(Cursor.Position).X,
-                    PointToClient(Cursor.Position).Y,
-                    1500
-                );
             };
             lightMode.Click += (sender, eventArgs) =>
             {
@@ -790,17 +545,6 @@ namespace TextEditor
                 Font = newFile.Font,
                 Image = Properties.Resources.fontAndColor
             };
-            fontAndColor.MouseHover += (sender, eventArgs) =>
-            {
-                new ToolTip().Show
-                (
-                    "Опций за промяна на шрифта",
-                    this,
-                    PointToClient(Cursor.Position).X,
-                    PointToClient(Cursor.Position).Y,
-                    2500
-                );
-            };
             fontAndColor.Click += (sender, eventArgs) => 
             { 
                FontSettingsWindowGUI settingsWin = new FontSettingsWindowGUI();
@@ -816,17 +560,6 @@ namespace TextEditor
                 Font = fileMenu.Font,
                 BackColor = fileMenu.BackColor
             };
-            helpMenu.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "Информация",
-                    this,
-                    PointToClient(Cursor.Position).X,
-                    PointToClient(Cursor.Position).Y,
-                    1500
-                );
-            };
             menuBar.Items.Add(helpMenu);
 
             //Setting up the information menu
@@ -835,17 +568,6 @@ namespace TextEditor
                 Text = "информация",
                 Font = newFile.Font,
                 Image = Properties.Resources.infoMenu
-            };
-            information.MouseHover += (sender, eventArgs) =>
-            {
-                tip.Show
-                (
-                    "относно приложението",
-                    this,
-                    PointToClient(Cursor.Position).X,
-                    PointToClient(Cursor.Position).Y,
-                    1500
-                );
             };
             information.Click += (sender, eventArgs) => { new InformationWindow(); };
             helpMenu.DropDownItems.Add(information);            

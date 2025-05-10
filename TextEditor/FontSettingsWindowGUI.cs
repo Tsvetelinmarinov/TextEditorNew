@@ -200,10 +200,23 @@ namespace TextEditor
                     case "наклонен и удебелен":
                         style = FontStyle.Bold | FontStyle.Italic;
                         break;
-                    default: 
-                        throw new Exception("Системна грешка! Невалиден стил на шрифт!");
+                    default:
+                        if 
+                        (
+                            MessageBox.Show
+                            (
+                                "Системна грешка. Не може да продължите работа!",
+                                "Системна грешка",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error
+                            ) 
+                            == DialogResult.OK
+                        )
+                        {
+                            Application.Exit();
+                            Environment.Exit(0);
+                        }
                     break;
-
                 }
 
                 FontChanged?.Invoke(new Font(fontBox.SelectedItem.ToString(), (float)fontSizeSpiner.Value, style));
@@ -248,7 +261,14 @@ namespace TextEditor
             };
             fontColorChooser.MouseHover += (sender, eventArgs) =>
             {
-                new ToolTip().Show("цвят на шрифта", this, PointToClient(Cursor.Position).X, PointToClient(Cursor.Position).Y, 1500);
+                new ToolTip().Show
+                (
+                    "цвят на шрифта", 
+                    this, 
+                    PointToClient(Cursor.Position).X, 
+                    PointToClient(Cursor.Position).Y, 
+                    1500
+                );
             };
             Controls.Add(fontColorChooser);
            
