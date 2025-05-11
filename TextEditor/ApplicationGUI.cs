@@ -74,6 +74,12 @@ namespace TextEditor
         //Menu 'lowercase'
         private ToolStripMenuItem lowercase;
 
+        //menu 'mark selection'
+        private ToolStripMenuItem markSelection;
+
+        //menu 'unmark selection'
+        private ToolStripMenuItem unmarkSelection;
+
         //menu 'appearance'
         private ToolStripMenuItem appearance;
 
@@ -332,6 +338,48 @@ namespace TextEditor
             lowercase.Click += (sender, eventArgs) => { editor.Text = editor.Text?.ToLower(); };
             editMenu.DropDownItems.Add(lowercase);
 
+            //menu 'change selection text fore'
+            markSelection = new ToolStripMenuItem()
+            {
+                Text = "маркиране на селекцията",
+                Font = newFile.Font,
+                Image = Properties.Resources.markSelection
+            };
+            markSelection.MouseHover += (sender, eventArgs) =>
+            {
+                tip.Show
+                (
+                    "маркиране на селектирания текст в жълто",
+                    this,
+                    PointToClient(Cursor.Position).X,
+                    PointToClient(Cursor.Position).Y,
+                    2000
+                );
+            };
+            markSelection.Click += (sender, eventArgs) => { editor.SelectionBackColor = Color.Yellow; };
+            editMenu.DropDownItems.Add(markSelection);
+
+            //menu 'unmark selection'
+            unmarkSelection = new ToolStripMenuItem()
+            {
+                Text = "отмаркиране на селекцията",
+                Font = newFile.Font,
+                Image = Properties.Resources.deselect
+            };
+            unmarkSelection.MouseHover += (sender, eventArgs) =>
+            {
+                tip.Show
+                (
+                    "отмаркиране на селектирания текст",
+                    this,
+                    PointToClient(Cursor.Position).X,
+                    PointToClient(Cursor.Position).Y,
+                    2000
+                );
+            };
+            unmarkSelection.Click += (sender, eventArgs) => { editor.SelectionBackColor = editor.BackColor; };
+            editMenu.DropDownItems.Add(unmarkSelection);
+
             //Settin up the options menu
             optionsMenu = new ToolStripMenuItem()
             {
@@ -383,6 +431,8 @@ namespace TextEditor
                     deleteAll,
                     uppercase,
                     lowercase,
+                    markSelection,
+                    unmarkSelection,
                     appearance,
                     blueMode,
                     darkMode,
@@ -408,6 +458,8 @@ namespace TextEditor
                     deleteAll,
                     uppercase,
                     lowercase,
+                    markSelection,
+                    unmarkSelection,
                     appearance,
                     fontAndColor,
                     information
@@ -448,6 +500,8 @@ namespace TextEditor
                     deleteAll,
                     uppercase,
                     lowercase,
+                    markSelection,
+                    unmarkSelection,
                     appearance,
                     blueMode,
                     darkMode,
@@ -460,8 +514,8 @@ namespace TextEditor
                 (
                     newFile, newWindow, open, save, reboot, exit,
                     back, next, selectAll, cut, copy, paste,
-                    deleteAll, uppercase, lowercase, appearance,
-                    fontAndColor, information
+                    deleteAll, uppercase, lowercase, markSelection,
+                    unmarkSelection, appearance, fontAndColor, information
                 );
             };
             appearance.DropDownItems.Add(darkMode);
@@ -499,6 +553,8 @@ namespace TextEditor
                     deleteAll,
                     uppercase,
                     lowercase,
+                    markSelection,
+                    unmarkSelection,
                     appearance,
                     blueMode,
                     darkMode,
@@ -524,6 +580,8 @@ namespace TextEditor
                     deleteAll,
                     uppercase,
                     lowercase,
+                    markSelection,
+                    unmarkSelection,
                     appearance,
                     fontAndColor,
                     information

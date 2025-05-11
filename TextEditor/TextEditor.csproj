@@ -213,5 +213,17 @@
   <ItemGroup>
     <None Include="Resources\newWindowDark.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\markSelection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\markSelectionDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deselectDark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deselect.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

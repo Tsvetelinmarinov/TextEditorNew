@@ -285,11 +285,12 @@ namespace TextEditor
             ToolStripMenuItem menu10, ToolStripMenuItem menu11, ToolStripMenuItem menu12, ToolStripMenuItem menu13,
             ToolStripMenuItem menu14, ToolStripMenuItem menu15, ToolStripMenuItem menu16, ToolStripMenuItem menu17,
             ToolStripMenuItem menu18, ToolStripMenuItem menu19, ToolStripMenuItem menu20, ToolStripMenuItem menu21,
-            ToolStripMenuItem menu22, ToolStripMenuItem menu23, ToolStripMenuItem menu24, ToolStripMenuItem menu25
+            ToolStripMenuItem menu22, ToolStripMenuItem menu23, ToolStripMenuItem menu24, ToolStripMenuItem menu25,
+            ToolStripMenuItem menu26, ToolStripMenuItem menu27
         )
         {
 
-            ToolStripMenuItem[] menus = new ToolStripMenuItem[25];
+            ToolStripMenuItem[] menus = new ToolStripMenuItem[27];
             menus[0] = menu1;
             menus[1] = menu2;
             menus[2] = menu3;
@@ -315,6 +316,8 @@ namespace TextEditor
             menus[22] = menu23;
             menus[23] = menu24;
             menus[24] = menu25;
+            menus[25] = menu26;
+            menus[26] = menu27;
 
 
             editor.BackColor = Color.FromArgb(255, 35, 35, 35);
@@ -339,35 +342,37 @@ namespace TextEditor
          * Change to original blue mode
          */
         public void ChangeToBlueMode(
-            ApplicationGUI editor,  
+            ApplicationGUI editor,
             RichTextBox box,
             Panel boxPanel,
-            MenuStrip menuBar, 
-            ToolStripMenuItem menu1, 
-            ToolStripMenuItem menu2, 
+            MenuStrip menuBar,
+            ToolStripMenuItem menu1,
+            ToolStripMenuItem menu2,
             ToolStripMenuItem menu3,
             ToolStripMenuItem menu4,
-            ToolStripMenuItem menu5, 
-            ToolStripMenuItem menu6, 
+            ToolStripMenuItem menu5,
+            ToolStripMenuItem menu6,
             ToolStripMenuItem menu7,
             ToolStripMenuItem menu8,
-            ToolStripMenuItem menu9, 
-            ToolStripMenuItem menu10, 
-            ToolStripMenuItem menu11, 
-            ToolStripMenuItem menu12, 
+            ToolStripMenuItem menu9,
+            ToolStripMenuItem menu10,
+            ToolStripMenuItem menu11,
+            ToolStripMenuItem menu12,
             ToolStripMenuItem menu13,
-            ToolStripMenuItem menu14, 
-            ToolStripMenuItem menu15, 
+            ToolStripMenuItem menu14,
+            ToolStripMenuItem menu15,
             ToolStripMenuItem menu16,
             ToolStripMenuItem menu17,
             ToolStripMenuItem menu18,
-            ToolStripMenuItem menu19, 
+            ToolStripMenuItem menu19,
             ToolStripMenuItem menu20,
             ToolStripMenuItem menu21,
             ToolStripMenuItem menu22,
-            ToolStripMenuItem menu23, 
-            ToolStripMenuItem menu24, 
-            ToolStripMenuItem menu25
+            ToolStripMenuItem menu23,
+            ToolStripMenuItem menu24,
+            ToolStripMenuItem menu25,
+            ToolStripMenuItem menu26,
+            ToolStripMenuItem menu27
         )
         {
 
@@ -385,7 +390,7 @@ namespace TextEditor
                 menu1, menu2, menu3, menu4, menu5, menu6, menu7, menu8, 
                 menu9, menu10, menu11, menu12, menu13, menu14, menu15, 
                 menu16, menu17, menu18, menu19, menu20, menu21, menu22, 
-                menu23, menu24, menu25
+                menu23, menu24, menu25, menu26, menu27
             };
 
             foreach (var menu in menus)
@@ -406,8 +411,9 @@ namespace TextEditor
             ToolStripMenuItem menu6, ToolStripMenuItem menu7, ToolStripMenuItem menu8,  ToolStripMenuItem menu9,
             ToolStripMenuItem menu10, ToolStripMenuItem menu11, ToolStripMenuItem menu12, ToolStripMenuItem menu13,
             ToolStripMenuItem menu14, ToolStripMenuItem menu15, ToolStripMenuItem menu16, ToolStripMenuItem menu17,
-            ToolStripMenuItem menu18,   ToolStripMenuItem menu19, ToolStripMenuItem menu20, ToolStripMenuItem menu21,
-            ToolStripMenuItem menu22, ToolStripMenuItem menu23,ToolStripMenuItem menu24, ToolStripMenuItem menu25
+            ToolStripMenuItem menu18, ToolStripMenuItem menu19, ToolStripMenuItem menu20, ToolStripMenuItem menu21,
+            ToolStripMenuItem menu22, ToolStripMenuItem menu23,ToolStripMenuItem menu24, ToolStripMenuItem menu25,
+            ToolStripMenuItem menu26, ToolStripMenuItem menu27
         )
         {
 
@@ -425,7 +431,7 @@ namespace TextEditor
                 menu1, menu2, menu3, menu4, menu5, menu6, menu7, menu8, menu9,
                 menu10, menu11, menu12, menu13, menu14, menu15, menu16,
                 menu17, menu18, menu19, menu20, menu21, menu22, menu23,
-                menu24, menu25
+                menu24, menu25, menu26, menu27
             };
 
             foreach (ToolStripMenuItem menu in menus)
@@ -444,7 +450,7 @@ namespace TextEditor
             ToolStripMenuItem menu5, ToolStripMenuItem menu6, ToolStripMenuItem menu7, ToolStripMenuItem menu8,
             ToolStripMenuItem menu9, ToolStripMenuItem menu10, ToolStripMenuItem menu11, ToolStripMenuItem menu12,
             ToolStripMenuItem menu13, ToolStripMenuItem menu14, ToolStripMenuItem menu15, ToolStripMenuItem menu16,
-            ToolStripMenuItem menu17, ToolStripMenuItem menu18
+            ToolStripMenuItem menu17, ToolStripMenuItem menu18, ToolStripMenuItem menu19, ToolStripMenuItem menu20
         )
         {
 
@@ -463,9 +469,11 @@ namespace TextEditor
             menu13.Image = Properties.Resources.delete;
             menu14.Image = Properties.Resources.uppercase;
             menu15.Image = Properties.Resources.lowercase;
-            menu16.Image = Properties.Resources.theme;
-            menu17.Image = Properties.Resources.fontAndColor;
-            menu18.Image = Properties.Resources.infoMenu;
+            menu16.Image = Properties.Resources.markSelection;
+            menu17.Image = Properties.Resources.deselect;
+            menu18.Image = Properties.Resources.theme;
+            menu19.Image = Properties.Resources.fontAndColor;
+            menu20.Image = Properties.Resources.infoMenu;
 
         }
 
@@ -478,7 +486,7 @@ namespace TextEditor
             ToolStripMenuItem menu5, ToolStripMenuItem menu6, ToolStripMenuItem menu7, ToolStripMenuItem menu8,
             ToolStripMenuItem menu9, ToolStripMenuItem menu10, ToolStripMenuItem menu11, ToolStripMenuItem menu12,
             ToolStripMenuItem menu13, ToolStripMenuItem menu14, ToolStripMenuItem menu15, ToolStripMenuItem menu16,
-            ToolStripMenuItem menu17, ToolStripMenuItem menu18
+            ToolStripMenuItem menu17, ToolStripMenuItem menu18, ToolStripMenuItem menu19, ToolStripMenuItem menu20
         )
         {
 
@@ -497,9 +505,11 @@ namespace TextEditor
             menu13.Image = Properties.Resources.delete;
             menu14.Image = Properties.Resources.uppercase;
             menu15.Image = Properties.Resources.lowercase;
-            menu16.Image = Properties.Resources.theme;
-            menu17.Image = Properties.Resources.fontAndColor;
-            menu18.Image = Properties.Resources.infoMenu;
+            menu16.Image = Properties.Resources.markSelection;
+            menu17.Image = Properties.Resources.deselect;
+            menu18.Image = Properties.Resources.theme;
+            menu19.Image = Properties.Resources.fontAndColor;
+            menu20.Image = Properties.Resources.infoMenu;
 
         }
 
@@ -512,7 +522,7 @@ namespace TextEditor
             ToolStripMenuItem menu5, ToolStripMenuItem menu6, ToolStripMenuItem menu7, ToolStripMenuItem menu8, 
             ToolStripMenuItem menu9, ToolStripMenuItem menu10, ToolStripMenuItem menu11, ToolStripMenuItem menu12,
             ToolStripMenuItem menu13, ToolStripMenuItem menu14, ToolStripMenuItem menu15, ToolStripMenuItem menu16,
-            ToolStripMenuItem menu17, ToolStripMenuItem menu18
+            ToolStripMenuItem menu17, ToolStripMenuItem menu18, ToolStripMenuItem menu19, ToolStripMenuItem menu20
         ) 
         {
 
@@ -531,9 +541,11 @@ namespace TextEditor
             menu13.Image = Properties.Resources.deleteDark;
             menu14.Image = Properties.Resources.uppercaseDark;
             menu15.Image = Properties.Resources.lowercaseDark;
-            menu16.Image = Properties.Resources.themeDark;
-            menu17.Image = Properties.Resources.fontAndColorDark;
-            menu18.Image = Properties.Resources.infoDark;
+            menu16.Image = Properties.Resources.markSelectionDark;
+            menu17.Image = Properties.Resources.deselectDark;
+            menu18.Image = Properties.Resources.themeDark;
+            menu19.Image = Properties.Resources.fontAndColorDark;
+            menu20.Image = Properties.Resources.infoDark;
 
         }
 

@@ -216,7 +216,7 @@ namespace TextEditor
 
             manifacture2 = new Label()
             {
-                Text = "ден 00 месец година",
+                Text = "Неделя, 11 Май, 2025",
                 Font = appName.Font,
                 Bounds = new Rectangle(10, 400, 170, 20)
             };

@@ -24,7 +24,6 @@ namespace TextEditor
         //Font style
         private Label fontStyle;
         private ComboBox fontStylesBox;
-        private string styles;
 
         //Font size
         private Label fontSize;
@@ -85,7 +84,7 @@ namespace TextEditor
             fontBox = new ComboBox()
             {
                 Bounds = new Rectangle(82, 37, 250, 30),
-                Font = new Font("Seige UI", 12),
+                Font = new Font("Seoge UI", 12),
                 DropDownStyle = ComboBoxStyle.DropDownList,
                 BackColor = Color.GhostWhite,
                 Cursor = Cursors.Hand

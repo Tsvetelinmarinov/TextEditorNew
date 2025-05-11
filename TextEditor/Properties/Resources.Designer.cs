@@ -123,6 +123,26 @@ namespace TextEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap deselect {
+            get {
+                object obj = ResourceManager.GetObject("deselect", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap deselectDark {
+            get {
+                object obj = ResourceManager.GetObject("deselectDark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap exit {
             get {
                 object obj = ResourceManager.GetObject("exit", resourceCulture);
@@ -246,6 +266,26 @@ namespace TextEditor.Properties {
         internal static System.Drawing.Bitmap lowercaseDark {
             get {
                 object obj = ResourceManager.GetObject("lowercaseDark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap markSelection {
+            get {
+                object obj = ResourceManager.GetObject("markSelection", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap markSelectionDark {
+            get {
+                object obj = ResourceManager.GetObject("markSelectionDark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
