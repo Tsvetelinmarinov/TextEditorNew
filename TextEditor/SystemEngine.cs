@@ -9,7 +9,14 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using System.Reflection;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Linq;
+using System.Collections.Generic;
+using Microsoft.CodeAnalysis.Emit;
+
 
 namespace TextEditor
 {
@@ -523,7 +530,7 @@ namespace TextEditor
             ToolStripMenuItem menu9, ToolStripMenuItem menu10, ToolStripMenuItem menu11, ToolStripMenuItem menu12,
             ToolStripMenuItem menu13, ToolStripMenuItem menu14, ToolStripMenuItem menu15, ToolStripMenuItem menu16,
             ToolStripMenuItem menu17, ToolStripMenuItem menu18, ToolStripMenuItem menu19, ToolStripMenuItem menu20
-        ) 
+        )
         {
 
             menu1.Image = Properties.Resources.newFileDark;
