@@ -4,14 +4,16 @@
  * ApplicationGUI - The Graphical User Interface for the application.
  */
 
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Drawing;
+using System;
 
 
 namespace TextEditor
 {
 
-    internal partial class ApplicationGUI : Form
+    internal class ApplicationGUI : Form
     {
 
         //Menu bar for the application 
@@ -105,7 +107,8 @@ namespace TextEditor
         public RichTextBox editor;
 
         //ToolTip for the menu bar and the menus
-        private ToolTip tip = new ToolTip();
+        private readonly ToolTip tip = new ToolTip();
+  
 
 
 
@@ -145,6 +148,7 @@ namespace TextEditor
                 Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
             };
             Controls.Add(textAreaPanel);
+            
 
             // Setting up the text box
             editor = new RichTextBox()
@@ -152,13 +156,16 @@ namespace TextEditor
                 Dock = DockStyle.Fill,
                 BorderStyle = BorderStyle.None, // Remove default border
                 Font = new Font("Cascadia Code", 14),
-                ForeColor = Color.FromArgb(255, 50, 50, 50),
+                ForeColor = Color.FromArgb(50, 50, 50),
                 BackColor = Color.White,
                 Multiline = true,
                 ScrollBars = RichTextBoxScrollBars.Both,
                 WordWrap = false
             };
             textAreaPanel.Controls.Add(editor);
+
+            //Coloring the keywords in the editor
+            editor.TextChanged += (sender, eventArgs) => { new SystemEngine().MatchkeyWords(editor); };
 
             //Setting up the menu bar
             menuBar = new MenuStrip()

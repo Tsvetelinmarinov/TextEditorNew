@@ -8,14 +8,8 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using System.Reflection;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Linq;
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis.Emit;
 
 
 namespace TextEditor
@@ -556,6 +550,104 @@ namespace TextEditor
 
         }
 
+        /**
+        * Color the keywords in the text editor
+        */
+        public void MatchkeyWords(RichTextBox editor)
+        {
+
+            // Регулярен израз за всички C# ключови думи (цели думи)
+            string keywordsPattern = 
+                @"\b(abstract|as|base|bool|break|byte|case|catch|char|
+                 checked|class|const|continue|decimal|default|delegate|
+                 do|double|else|enum|event|explicit|extern|false|finally|
+                 fixed|float|for|foreach|goto|if|implicit|in|int|interface|
+                 internal|is|lock|long|namespace|new|null|object|operator|out|
+                 override|params|private|protected|public|readonly|ref|return|
+                 sbyte|sealed|short|sizeof|stackalloc|static|string|struct|
+                 switch|this|throw|true|try|typeof|uint|ulong|unchecked|
+                unsafe|ushort|using|virtual|void|volatile|while)\b";
+
+            // Шаблон за стрингове (поддържа escape кавички)
+            string stringPattern = "\"(?:\\\\.|[^\"])*\"";
+          
+            // Шаблон за имена на методи (примерно: Main, ToString, MyMethod)
+            string methodPattern = @"\b([A-Za-z_][A-Za-z0-9_]*)\s*(?=\()";
+
+            int selectionStart = editor.SelectionStart;
+            int selectionLength = editor.SelectionLength;
+
+            editor.SuspendLayout();
+
+            // Оцвети целия текст в стандартен цвят
+            editor.SelectAll();
+            editor.SelectionColor = Color.Black;
+
+            // 1. Оцвети стринговете първо
+            foreach (Match str in Regex.Matches(editor.Text, stringPattern))
+            {
+                editor.Select(str.Index, str.Length);
+                editor.SelectionColor = Color.Brown; // или друг цвят за стрингове
+            }
+
+            //Оцвети числата в червено
+            foreach (Match number in Regex.Matches(editor.Text, @"[0-9]"))
+            {
+                editor.Select(number.Index, number.Length);
+                editor.SelectionColor = Color.Red; // или друг цвят за числа
+            }
+
+            // 2. Оцвети ключовите думи, които не са в стринг
+            foreach (Match match in Regex.Matches(editor.Text, keywordsPattern))
+            {
+                // Проверка дали не е в стринг
+                bool inString = false;
+                foreach (Match str in Regex.Matches(editor.Text, stringPattern))
+                {
+                    if (match.Index >= str.Index && match.Index < str.Index + str.Length)
+                    {
+                        inString = true;
+                        break;
+                    }
+                }
+                if (!inString)
+                {
+                    editor.Select(match.Index, match.Length);
+                    editor.SelectionColor = Color.Blue;
+                }
+            }
+
+            // 3. Оцвети имената на методи, които не са в стринг
+            foreach (Match match in Regex.Matches(editor.Text, methodPattern))
+            {
+                // Проверка дали не е в стринг
+                bool inString = false;
+                foreach (Match str in Regex.Matches(editor.Text, stringPattern))
+                {
+                    if (match.Index >= str.Index && match.Index < str.Index + str.Length)
+                    {
+                        inString = true;
+                        break;
+                    }
+                }
+                if (!inString)
+                {
+                    editor.Select(match.Index, match.Length);
+                    editor.SelectionColor = Color.FromArgb(43, 145, 175); 
+                }
+            }
+
+            // Възстанови селекцията
+            editor.Select(selectionStart, selectionLength);
+            editor.SelectionColor = Color.Black;
+
+            editor.ResumeLayout();
+
+
+        }
+
+
     }
+
 
 }
