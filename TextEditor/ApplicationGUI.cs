@@ -165,7 +165,7 @@ namespace TextEditor
             textAreaPanel.Controls.Add(editor);
 
             //Coloring the keywords in the editor
-            editor.TextChanged += (sender, eventArgs) => { new SystemEngine().MatchkeyWords(editor); };
+            editor.TextChanged += (sender, eventArgs) => { new SystemEngine().MatchKeywords(editor); };
 
             //Setting up the menu bar
             menuBar = new MenuStrip()
