@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Drawing;
 using System;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 
 namespace TextEditor
@@ -110,8 +111,6 @@ namespace TextEditor
         private readonly ToolTip tip = new ToolTip();
   
 
-
-
         /**
          * Constructor for the ApplicationGUI class.
          * Initializes the form and its components.
@@ -124,11 +123,15 @@ namespace TextEditor
 
             //Fix the size of the window
             this.Text = "Текстов редактор";
-            this.Size = new Size(1300, 700);
+            this.Size = new Size(1800, 930);
             this.Icon = Properties.Resources.icon;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.BackColor = Color.GhostWhite;
-            this.FormBorderStyle = FormBorderStyle.Sizable;
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimumSize = this.Size;
+            this.MaximumSize = this.Size;
+            this.Shown += (sender, eventArgs) => { darkMode.PerformClick(); };// Set the dark mode default 
 
         }
 
@@ -140,32 +143,62 @@ namespace TextEditor
         {
 
             // Setting up the panel for the editor
-            Panel textAreaPanel = new Panel()
+            Panel textAreaPanel = new()
             {
-                Bounds = new Rectangle(-1, 55, 1280, 605),
+                Bounds = new Rectangle(-1, 55, 1780, 832),
                 BackColor = Color.FromArgb(140, 80, 80, 200), // Border color
                 Padding = new Padding(1),// Thickness of the border
-                Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right
             };
             Controls.Add(textAreaPanel);
-            
+
 
             // Setting up the text box
             editor = new RichTextBox()
             {
-                Dock = DockStyle.Fill,
-                BorderStyle = BorderStyle.None, // Remove default border
-                Font = new Font("Cascadia Code", 14),
+                Bounds = new Rectangle(-1, -1, 1780, 832),
+                Font = new Font("Cascadia Code", 13),
                 ForeColor = Color.FromArgb(50, 50, 50),
                 BackColor = Color.White,
                 Multiline = true,
                 ScrollBars = RichTextBoxScrollBars.Both,
-                WordWrap = false
+                WordWrap = false,
+                AcceptsTab = true,
             };
             textAreaPanel.Controls.Add(editor);
 
             //Coloring the keywords in the editor
-            editor.TextChanged += (sender, eventArgs) => { new SystemEngine().MatchKeywords(editor); };
+            editor.TextChanged += (sender, eventArgs) => 
+            {
+                editor.SelectionIndent = 2;
+                new SystemEngine().MatchKeywords(editor); 
+            };
+
+            //Match the cruely brackets in the editor
+            editor.KeyPress += (sender, eventArgs) =>
+            {
+                if (eventArgs.KeyChar == '{')
+                {
+                    //Запази текущата позиция на курсора
+                    int currentCursorPosition = editor.SelectionStart;
+
+                    // Вмъкни текста на позицията на курсора
+                    editor.SelectedText = "\n{\n\n    \n\n}";
+
+                    // Премести курсора между скобите, след отстъпа
+                    editor.SelectionStart = currentCursorPosition + 8;
+                    eventArgs.Handled = true;
+                }
+            };
+
+            //Write four spaces when pressing tab
+            editor.KeyDown += (sender, eventArgs) =>
+            {
+                if (eventArgs.KeyCode == Keys.Tab)
+                {
+                    editor.SelectedText = "    "; // Вмъкни четири интервала
+                    eventArgs.SuppressKeyPress = true; // Прекъсни стандартното поведение на таб
+                }
+            };
 
             //Setting up the menu bar
             menuBar = new MenuStrip()
