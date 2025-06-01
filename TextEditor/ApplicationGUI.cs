@@ -107,6 +107,9 @@ namespace TextEditor
 
         //ToolTip for the menu bar and the menus
         private readonly ToolTip tip = new();
+
+        //Button run
+        private PictureBox execute;
   
 
         /**
@@ -130,6 +133,15 @@ namespace TextEditor
             this.MinimumSize = this.Size;
             this.MaximumSize = this.Size;
             this.Shown += (sender, eventArgs) => { darkMode.PerformClick(); };// Set the dark mode default 
+            this.KeyPreview = true; // Enable key preview to handle key events in the form
+            this.KeyDown += (sender, eventArgs) =>
+            {
+                if (eventArgs.KeyCode == Keys.F5)
+                {
+                    new SystemEngine().CompileAndRun(editor);
+                    eventArgs.Handled = true;
+                }
+            };
 
         }
 
@@ -165,10 +177,10 @@ namespace TextEditor
             textAreaPanel.Controls.Add(editor);
 
             //Coloring the keywords in the editor and set the indent
-            editor.TextChanged += (sender, eventArgs) => 
+            editor.TextChanged += (sender, eventArgs) =>
             {
                 editor.SelectionIndent = 6;
-                new SystemEngine().MatchKeywords(editor); 
+                new SystemEngine().MatchKeywords(editor);
             };
 
             //Match the cruely brackets in the editor
@@ -200,7 +212,7 @@ namespace TextEditor
                     }
 
                 }
-                
+
             };
 
             //Write four spaces when pressing tab
@@ -367,7 +379,7 @@ namespace TextEditor
                 Text = "изтриване на всичко",
                 Font = newFile.Font,
                 Image = Properties.Resources.delete
-            }; 
+            };
             deleteAll.Click += (sender, eventArgs) => { editor.Clear(); };
             editMenu.DropDownItems.Add(deleteAll);
 
@@ -656,11 +668,11 @@ namespace TextEditor
                 Font = newFile.Font,
                 Image = Properties.Resources.fontAndColor
             };
-            fontAndColor.Click += (sender, eventArgs) => 
-            { 
-               FontSettingsWindowGUI settingsWin = new FontSettingsWindowGUI();
-               settingsWin.FontChanged += (newFont) => { editor.Font = newFont; };
-               settingsWin.ForegroundOnChange += (newForeColor) => { editor.ForeColor = newForeColor; };
+            fontAndColor.Click += (sender, eventArgs) =>
+            {
+                FontSettingsWindowGUI settingsWin = new FontSettingsWindowGUI();
+                settingsWin.FontChanged += (newFont) => { editor.Font = newFont; };
+                settingsWin.ForegroundOnChange += (newForeColor) => { editor.ForeColor = newForeColor; };
             };
             optionsMenu.DropDownItems.Add(fontAndColor);
 
@@ -681,7 +693,19 @@ namespace TextEditor
                 Image = Properties.Resources.infoMenu
             };
             information.Click += (sender, eventArgs) => { new InformationWindow(); };
-            helpMenu.DropDownItems.Add(information);            
+            helpMenu.DropDownItems.Add(information);
+
+            //Button run
+            execute = new PictureBox()
+            {
+                Bounds = new Rectangle(1700, 30, 18, 18),
+                BackColor = Color.FromArgb(200, 31, 31, 31),
+                Image = Properties.Resources.run,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+            };
+            Controls.Add(execute);
+            tip.SetToolTip(execute, "Изпълни кода в редактора");
+            execute.MouseClick += (sender, eventArgs) => { new SystemEngine().CompileAndRun(editor); };
 
         }
 

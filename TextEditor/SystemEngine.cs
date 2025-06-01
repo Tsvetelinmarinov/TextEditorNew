@@ -6,6 +6,7 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -128,6 +129,7 @@ namespace TextEditor
          */
         public void ExportDataToLocalFile(RichTextBox box)
         {
+
 
             if (box.Text != null && box.Text != "")
             {
@@ -868,6 +870,56 @@ namespace TextEditor
             editor.SelectionColor = Color.GhostWhite;
 
             editor.ResumeLayout(); // Възобновяване на обновяването на редактора
+
+        }
+
+
+        /**
+         * Compile and run the code in the editor
+         */
+        public void CompileAndRun(RichTextBox editor)
+        {
+
+            // 1. Запиши кода във временен файл
+            string tempPath = Path.Combine(Path.GetTempPath(), "TempEditorCode.cs");
+            File.WriteAllText(tempPath, editor.Text.Replace("\n", "\r\n"));
+
+            // 2. Компилирай с csc.exe
+            string cscPath = Path.Combine(
+                System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory(),
+                "csc.exe"
+            );
+            string exePath = Path.Combine(Path.GetTempPath(), "TempEditorCode.exe");
+
+            Process compileProcess = new();
+            compileProcess.StartInfo.FileName = cscPath;
+            compileProcess.StartInfo.Arguments = $"/t:exe /out:\"{exePath}\" \"{tempPath}\"";
+            compileProcess.StartInfo.CreateNoWindow = true;
+            compileProcess.StartInfo.UseShellExecute = false;
+            compileProcess.StartInfo.RedirectStandardOutput = true;
+            compileProcess.StartInfo.RedirectStandardError = true;
+            compileProcess.Start();
+            _ = compileProcess.StandardOutput.ReadToEnd();
+            string error = compileProcess.StandardError.ReadToEnd();
+            compileProcess.WaitForExit();
+
+            if (compileProcess.ExitCode != 0)
+            {
+                MessageBox.Show(
+                    "Compile error:\n" + error, 
+                    "C# Compile Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                
+                return;
+            }
+
+            // 3. Стартирай exe файла в терминал
+            Process runProcess = new();
+            runProcess.StartInfo.FileName = "cmd.exe";
+            runProcess.StartInfo.Arguments = $"/K \"\"{exePath}\"\"";
+            runProcess.Start();
 
         }
 
