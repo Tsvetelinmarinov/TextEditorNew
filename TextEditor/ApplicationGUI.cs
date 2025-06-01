@@ -7,8 +7,6 @@
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Drawing;
-using System;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 
 namespace TextEditor
@@ -96,7 +94,7 @@ namespace TextEditor
         private ToolStripMenuItem lightMode;
 
         //Group of the menu 'appearance'
-        private ToolStripMenuItem[] colorModeMenus = new ToolStripMenuItem[3];
+        private readonly ToolStripMenuItem[] colorModeMenus = new ToolStripMenuItem[3];
 
         //menu "font and color"
         private ToolStripMenuItem fontAndColor;
@@ -108,7 +106,7 @@ namespace TextEditor
         public RichTextBox editor;
 
         //ToolTip for the menu bar and the menus
-        private readonly ToolTip tip = new ToolTip();
+        private readonly ToolTip tip = new();
   
 
         /**
@@ -131,7 +129,7 @@ namespace TextEditor
             this.MaximizeBox = false;
             this.MinimumSize = this.Size;
             this.MaximumSize = this.Size;
-            //this.Shown += (sender, eventArgs) => { darkMode.PerformClick(); };// Set the dark mode default 
+            this.Shown += (sender, eventArgs) => { darkMode.PerformClick(); };// Set the dark mode default 
 
         }
 
@@ -145,7 +143,7 @@ namespace TextEditor
             // Setting up the panel for the editor
             Panel textAreaPanel = new()
             {
-                Bounds = new Rectangle(-1, 55, 1780, 832),
+                Bounds = new Rectangle(-1, 55, 1782, 834),
                 BackColor = Color.FromArgb(140, 80, 80, 200), // Border color
                 Padding = new Padding(1),// Thickness of the border
             };
@@ -155,7 +153,7 @@ namespace TextEditor
             // Setting up the text box
             editor = new RichTextBox()
             {
-                Bounds = new Rectangle(-1, -1, 1780, 832),
+                Bounds = new Rectangle(-1, 6, 1782, 834),
                 Font = new Font("Cascadia Code", 13),
                 ForeColor = Color.FromArgb(50, 50, 50),
                 BackColor = Color.White,
@@ -166,10 +164,10 @@ namespace TextEditor
             };
             textAreaPanel.Controls.Add(editor);
 
-            //Coloring the keywords in the editor
+            //Coloring the keywords in the editor and set the indent
             editor.TextChanged += (sender, eventArgs) => 
             {
-                editor.SelectionIndent = 2;
+                editor.SelectionIndent = 6;
                 new SystemEngine().MatchKeywords(editor); 
             };
 
@@ -181,13 +179,28 @@ namespace TextEditor
                     //Запази текущата позиция на курсора
                     int currentCursorPosition = editor.SelectionStart;
 
-                    // Вмъкни текста на позицията на курсора
-                    editor.SelectedText = "\n{\n\n    \n\n}";
+                    // Проверка дали не е в стринг
+                    bool inString = false;
+                    foreach (Match str in Regex.Matches(editor.Text, "\"(?:\\\\.|[^\"])*\""))
+                    {
+                        if (str.Index >= str.Index && str.Index < str.Index + str.Length)
+                        {
+                            inString = true;
+                            break;
+                        }
+                    }
+                    if (!inString)
+                    {
+                        // Вмъкни текста на позицията на курсора
+                        editor.SelectedText = "\n{\n\n    \n\n}";
 
-                    // Премести курсора между скобите, след отстъпа
-                    editor.SelectionStart = currentCursorPosition + 8;
-                    eventArgs.Handled = true;
+                        // Премести курсора между скобите, след отстъпа
+                        editor.SelectionStart = currentCursorPosition + 8;
+                        eventArgs.Handled = true;
+                    }
+
                 }
+                
             };
 
             //Write four spaces when pressing tab

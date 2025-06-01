@@ -321,12 +321,13 @@ namespace TextEditor
 
             editor.BackColor = Color.FromArgb(35, 35, 35);
             box.TextChanged += (sender, eventArgs) => { MatchKeywordsDark(editor.editor); };
-            boxPanel.BackColor = Color.FromArgb(140, 80, 80, 200);
+            boxPanel.BackColor = Color.FromArgb(25, 25, 25);
 
             box.BackColor = Color.FromArgb(25, 25, 25);
             box.ForeColor = Color.GhostWhite;
+            box.BorderStyle = BorderStyle.None;
 
-            menuBar.BackColor = Color.FromArgb(255, 35, 35, 35);
+            menuBar.BackColor = Color.FromArgb(255, 21, 21, 21);
             menuBar.Renderer = new DarkModeMenuBackgroundRenderer();
 
             foreach (ToolStripMenuItem menu in menus)
@@ -701,7 +702,7 @@ namespace TextEditor
             foreach (Match comment in Regex.Matches(editor.Text, @"(\/\/.*?\/\/|\/\*[\s\S]*?\*\/)")) 
             {
                 editor.Select(comment.Index, comment.Length);
-                editor.SelectionColor = Color.FromArgb(20, 232, 10);
+                editor.SelectionColor = Color.DarkGreen;
             }
 
             // Възстанови селекцията в ървоначалното ѝ състояние
@@ -745,14 +746,14 @@ namespace TextEditor
             foreach (Match str in Regex.Matches(editor.Text, "\"(?:\\\\.|[^\"])*\""))
             {
                 editor.Select(str.Index, str.Length);
-                editor.SelectionColor = Color.SandyBrown;
+                editor.SelectionColor = Color.RosyBrown;
             }
 
             // Оцвети числата в червено
             foreach (Match number in Regex.Matches(editor.Text, @"[0-9]"))
             {
                 editor.Select(number.Index, number.Length);
-                editor.SelectionColor = Color.DarkGreen;
+                editor.SelectionColor = Color.PaleVioletRed;
             }
 
             // Оцвети ключовите думи, които не са в стринг
@@ -811,7 +812,7 @@ namespace TextEditor
                 if (!inString)
                 {
                     editor.Select(op.Index, op.Length);
-                    editor.SelectionColor = Color.FromArgb(86, 156, 214);
+                    editor.SelectionColor = Color.PaleVioletRed;
                 }
             }
 
@@ -835,7 +836,7 @@ namespace TextEditor
                 }
             }
 
-            // Оцветяване на имена на променливи
+            // Оцветяване на имена на променливи и класове
             foreach (Match variable in Regex.Matches(editor.Text, @"\b([a-zA-Z_][a-zA-Z0-9_]*)(?=\.)\b"))
             {
                 // Проверка дали не е в стринг

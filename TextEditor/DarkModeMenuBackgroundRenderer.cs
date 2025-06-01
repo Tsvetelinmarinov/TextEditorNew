@@ -19,15 +19,13 @@ namespace TextEditor
          
             if (eventArgs.Item.Selected)
             {
-                Rectangle menuItem = new Rectangle(Point.Empty, eventArgs.Item.Size);
+                Rectangle menuItem = new(Point.Empty, eventArgs.Item.Size);
                 menuItem.Width--;
                 menuItem.Height--;
-                eventArgs.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(155, 50, 50, 70)), menuItem);
+                eventArgs.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(155, 30, 30, 90)), menuItem);
 
-                using (Pen pen = new Pen(Color.GhostWhite))
-                {
-                    eventArgs.Graphics.DrawRectangle(pen, menuItem);
-                }
+                using Pen pen = new(Color.FromArgb(155, 130, 130, 90));
+                eventArgs.Graphics.DrawRectangle(pen, menuItem);
             }
             else
             {
