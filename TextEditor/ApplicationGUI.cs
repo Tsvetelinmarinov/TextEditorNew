@@ -131,7 +131,7 @@ namespace TextEditor
             this.MaximizeBox = false;
             this.MinimumSize = this.Size;
             this.MaximumSize = this.Size;
-            this.Shown += (sender, eventArgs) => { darkMode.PerformClick(); };// Set the dark mode default 
+            //this.Shown += (sender, eventArgs) => { darkMode.PerformClick(); };// Set the dark mode default 
 
         }
 

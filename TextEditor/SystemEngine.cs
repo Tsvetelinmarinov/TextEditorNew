@@ -552,8 +552,9 @@ namespace TextEditor
 
         }
 
+
         /**
-         * Colorint the keywords in the text editor
+         * Coloring the keywords in the text editor for the light and the blue mode
          */
         public void MatchKeywords(RichTextBox editor)
         {
@@ -570,32 +571,24 @@ namespace TextEditor
                 switch|this|throw|true|try|typeof|uint|ulong|unchecked|
                 unsafe|ushort|using|virtual|void|volatile|while)\b";
 
-            // Шаблон за стрингове (поддържа escape кавички)
-            string stringPattern = "\"(?:\\\\.|[^\"])*\"";
-
-            // Шаблон за имена на методи (примерно: Main, ToString, MyMethod)
-            string methodPattern = @"([A-Za-z_][A-Za-z0-9_]*)(?=\()";
-
-            // Шаблон за коментари
-            string commentPattern = @"(\/\/.*?\/\/|\/\*[\s\S]*?\*\/)";
-
+            //Запазване на позицията текущата селекция
             int selectionStart = editor.SelectionStart;
             int selectionLength = editor.SelectionLength;
 
-            editor.SuspendLayout();
+            editor.SuspendLayout(); // Спиране на обновяването на редактора за по-добра производителност
 
             // Оцвети целия текст в стандартен цвят
             editor.SelectAll();
-            editor.SelectionColor = Color.Black;
+            editor.SelectionColor = Color.FromArgb(100, 40, 40, 40);
 
-            // 1. Оцвети стринговете първо
-            foreach (Match str in Regex.Matches(editor.Text, stringPattern))
+            // Оцвети стринговете първо в кафяво
+            foreach (Match str in Regex.Matches(editor.Text, "\"(?:\\\\.|[^\"])*\""))
             {
                 editor.Select(str.Index, str.Length);
                 editor.SelectionColor = Color.Brown; // или друг цвят за стрингове
             }
 
-            //Оцвети числата в червено
+            // Оцвети числата в червено
             foreach (Match number in Regex.Matches(editor.Text, @"[0-9]"))
             {
                 editor.Select(number.Index, number.Length);
@@ -603,12 +596,12 @@ namespace TextEditor
             }
 
 
-            // 2. Оцвети ключовите думи, които не са в стринг
+            // Оцвети ключовите думи, които не са в стринг
             foreach (Match match in Regex.Matches(editor.Text, keywordsPattern))
             {
                 // Проверка дали не е в стринг
                 bool inString = false;
-                foreach (Match str in Regex.Matches(editor.Text, stringPattern))
+                foreach (Match str in Regex.Matches(editor.Text, "\"(?:\\\\.|[^\"])*\""))
                 {
                     if (match.Index >= str.Index && match.Index < str.Index + str.Length)
                     {
@@ -623,12 +616,12 @@ namespace TextEditor
                 }
             }
 
-            // 3. Оцвети имената на методи, които не са в стринг
-            foreach (Match match in Regex.Matches(editor.Text, methodPattern))
+            // Оцвети имената на методи, които не са в стринг
+            foreach (Match match in Regex.Matches(editor.Text, @"([A-Za-z_][A-Za-z0-9_]*)(?=\()"))
             {
                 // Проверка дали не е в стринг
                 bool inString = false;
-                foreach (Match str in Regex.Matches(editor.Text, stringPattern))
+                foreach (Match str in Regex.Matches(editor.Text, "\"(?:\\\\.|[^\"])*\""))
                 {
                     if (match.Index >= str.Index && match.Index < str.Index + str.Length)
                     {
@@ -639,7 +632,7 @@ namespace TextEditor
                 if (!inString)
                 {
                     editor.Select(match.Index, match.Length);
-                    editor.SelectionColor = Color.FromArgb(43, 145, 175);
+                    editor.SelectionColor = Color.FromArgb(116, 83, 31);
                 }
             }
 
@@ -649,7 +642,7 @@ namespace TextEditor
             {
                 // Проверка дали не е в стринг
                 bool inString = false;
-                foreach (Match str in Regex.Matches(editor.Text, stringPattern))
+                foreach (Match str in Regex.Matches(editor.Text, "\"(?:\\\\.|[^\"])*\""))
                 {
                     if (op.Index >= str.Index && op.Index < str.Index + str.Length)
                     {
@@ -669,7 +662,7 @@ namespace TextEditor
             {
                 // Проверка дали не е в стринг
                 bool inString = false;
-                foreach (Match str in Regex.Matches(editor.Text, stringPattern))
+                foreach (Match str in Regex.Matches(editor.Text, "\"(?:\\\\.|[^\"])*\""))
                 {
                     if (bracket.Index >= str.Index && bracket.Index < str.Index + str.Length)
                     {
@@ -689,7 +682,7 @@ namespace TextEditor
             {
                 // Проверка дали не е в стринг
                 bool inString = false;
-                foreach (Match str in Regex.Matches(editor.Text, stringPattern))
+                foreach (Match str in Regex.Matches(editor.Text, "\"(?:\\\\.|[^\"])*\""))
                 {
                     if (variable.Index >= str.Index && variable.Index < str.Index + str.Length)
                     {
@@ -700,27 +693,28 @@ namespace TextEditor
                 if (!inString)
                 {
                     editor.Select(variable.Index, variable.Length);
-                    editor.SelectionColor = Color.FromArgb(17, 20, 197);
+                    editor.SelectionColor = Color.Teal;
                 }
             }
 
-            //Коменари
-            foreach (Match comment in Regex.Matches(editor.Text, commentPattern)) 
+            // Коменари
+            foreach (Match comment in Regex.Matches(editor.Text, @"(\/\/.*?\/\/|\/\*[\s\S]*?\*\/)")) 
             {
                 editor.Select(comment.Index, comment.Length);
-                editor.SelectionColor = Color.FromArgb(20, 142, 10);
+                editor.SelectionColor = Color.FromArgb(20, 232, 10);
             }
 
-            // Възстанови селекцията
+            // Възстанови селекцията в ървоначалното ѝ състояние
             editor.Select(selectionStart, selectionLength);
-            editor.SelectionColor = Color.Black;
+            editor.SelectionColor = Color.FromArgb(100, 40, 40, 40);
 
-            editor.ResumeLayout();
+            editor.ResumeLayout(); // Възобновяване на обновяването на редактора
 
         }
 
+
         /**
-         *  Colorint the keywords on the dark mode 
+         *  Coloring the keywords on the dark mode 
          */
         public void MatchKeywordsDark(RichTextBox editor)
         {
@@ -737,44 +731,36 @@ namespace TextEditor
                 switch|this|throw|true|try|typeof|uint|ulong|unchecked|
                 unsafe|ushort|using|virtual|void|volatile|while)\b";
 
-            // Шаблон за стрингове (поддържа escape кавички)
-            string stringPattern = "\"(?:\\\\.|[^\"])*\"";
-
-            // Шаблон за имена на методи (примерно: Main, ToString, MyMethod)
-            string methodPattern = @"\b([A-Za-z_][A-Za-z0-9_]*)(?=\()";
-
-            // Шаблон за коментари
-            string commentPattern = @"\/\/.*?\/\/|\/\*[\s\S]*?\*\/";
-
+            // Запазване на позицията на текущата селекция
             int selectionStart = editor.SelectionStart;
             int selectionLength = editor.SelectionLength;
 
-            editor.SuspendLayout();
+            editor.SuspendLayout(); // Спиране на обновяването на редактора за по-добра производителност
 
             // Оцвети целия текст в стандартен цвят
             editor.SelectAll();
             editor.SelectionColor = Color.GhostWhite;
 
-            // 1. Оцвети стринговете първо
-            foreach (Match str in Regex.Matches(editor.Text, stringPattern))
+            // Оцвети стринговете първо
+            foreach (Match str in Regex.Matches(editor.Text, "\"(?:\\\\.|[^\"])*\""))
             {
                 editor.Select(str.Index, str.Length);
                 editor.SelectionColor = Color.SandyBrown;
             }
 
-            //Оцвети числата в червено
+            // Оцвети числата в червено
             foreach (Match number in Regex.Matches(editor.Text, @"[0-9]"))
             {
                 editor.Select(number.Index, number.Length);
                 editor.SelectionColor = Color.DarkGreen;
             }
 
-            // 2. Оцвети ключовите думи, които не са в стринг
+            // Оцвети ключовите думи, които не са в стринг
             foreach (Match match in Regex.Matches(editor.Text, keywordsPattern))
             {
                 // Проверка дали не е в стринг
                 bool inString = false;
-                foreach (Match str in Regex.Matches(editor.Text, stringPattern))
+                foreach (Match str in Regex.Matches(editor.Text, "\"(?:\\\\.|[^\"])*\""))
                 {
                     if (match.Index >= str.Index && match.Index < str.Index + str.Length)
                     {
@@ -789,12 +775,12 @@ namespace TextEditor
                 }
             }
 
-            // 3. Оцвети имената на методи, които не са в стринг
-            foreach (Match match in Regex.Matches(editor.Text, methodPattern))
+            // Оцвети имената на методи, които не са в стринг
+            foreach (Match match in Regex.Matches(editor.Text, @"\b([A-Za-z_][A-Za-z0-9_]*)(?=\()"))
             {
                 // Проверка дали не е в стринг
                 bool inString = false;
-                foreach (Match str in Regex.Matches(editor.Text, stringPattern))
+                foreach (Match str in Regex.Matches(editor.Text, "\"(?:\\\\.|[^\"])*\""))
                 {
                     if (match.Index >= str.Index && match.Index < str.Index + str.Length)
                     {
@@ -814,7 +800,7 @@ namespace TextEditor
             {
                 // Проверка дали не е в стринг
                 bool inString = false;
-                foreach (Match str in Regex.Matches(editor.Text, stringPattern))
+                foreach (Match str in Regex.Matches(editor.Text, "\"(?:\\\\.|[^\"])*\""))
                 {
                     if (op.Index >= str.Index && op.Index < str.Index + str.Length)
                     {
@@ -834,7 +820,7 @@ namespace TextEditor
             {
                 // Проверка дали не е в стринг
                 bool inString = false;
-                foreach (Match str in Regex.Matches(editor.Text, stringPattern))
+                foreach (Match str in Regex.Matches(editor.Text, "\"(?:\\\\.|[^\"])*\""))
                 {
                     if (bracket.Index >= str.Index && bracket.Index < str.Index + str.Length)
                     {
@@ -854,7 +840,7 @@ namespace TextEditor
             {
                 // Проверка дали не е в стринг
                 bool inString = false;
-                foreach (Match str in Regex.Matches(editor.Text, stringPattern))
+                foreach (Match str in Regex.Matches(editor.Text, "\"(?:\\\\.|[^\"])*\""))
                 {
                     if (variable.Index >= str.Index && variable.Index < str.Index + str.Length)
                     {
@@ -869,8 +855,8 @@ namespace TextEditor
                 }
             }
 
-            //Коменари
-            foreach (Match comment in Regex.Matches(editor.Text, commentPattern))
+            // Коменари
+            foreach (Match comment in Regex.Matches(editor.Text, @"\/\/.*?\/\/|\/\*[\s\S]*?\*\/"))
             {
                 editor.Select(comment.Index, comment.Length);
                 editor.SelectionColor = Color.FromArgb(20, 142, 10);
@@ -880,7 +866,7 @@ namespace TextEditor
             editor.Select(selectionStart, selectionLength);
             editor.SelectionColor = Color.GhostWhite;
 
-            editor.ResumeLayout();
+            editor.ResumeLayout(); // Възобновяване на обновяването на редактора
 
         }
 
