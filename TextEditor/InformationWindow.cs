@@ -8,42 +8,15 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Diagnostics;
 
-
 namespace TextEditor
 {
-
     public class InformationWindow : Form
     {
-
-        //Application name 
-        private Label appName;
-        private Label appName2;
-
-        //Application version
-        private Label appVersion;
-        private Label appVersion2;
-
-        //Description
-        private Label description;
-        private Label description2;
-
-        //Author
-        private Label author;
-        private Label authorName;
-
-        //Manifacture
-        private Label manifacture;
-        private Label manifacture2;
-
-        //Place
-        private Label place;
-        private Label place2;
-
-
-
+        /// <summary>
+        /// The Graphical User Interface of the Information window
+        /// </summary>
         public InformationWindow()
         {
-
             BuildWindow();
 
             Text = "Информация за приложението";
@@ -56,22 +29,29 @@ namespace TextEditor
             MaximizeBox = false;
             MinimumSize = Size;
             MaximumSize = Size;
-
         }
 
+        /// <summary>
+        /// Create the Graphical User Interface
+        /// </summary>
         private void BuildWindow()
         {
-
+            BuildLogos();
+            BuildDescription();
+        }
+        /// <summary>
+        /// Create and set Facebook and Github logos
+        /// </summary>
+        private void BuildLogos()
+        {
             //Spacer
-            Label bottomSpacer = new Label()
+            Label bottomSpacer = new()
             {
                 BackColor = Color.DarkGray,
                 Bounds = new Rectangle(0, 535, 530, 1)
             };
-            Controls.Add(bottomSpacer);
-
             //Facebook logo with link to my profile
-            PictureBox fbLogo = new PictureBox()
+            PictureBox fbLogo = new()
             {
                 Image = Properties.Resources.facebook,
                 SizeMode = PictureBoxSizeMode.StretchImage,
@@ -80,7 +60,7 @@ namespace TextEditor
             };
             fbLogo.MouseHover += (sender, eventArgs) =>
             {
-                ToolTip tip = new ToolTip();
+                ToolTip tip = new();
                 tip.Show
                 (
                     "Линк към профила ми във Facebook",
@@ -92,18 +72,11 @@ namespace TextEditor
             };
             fbLogo.Click += (sender, eventArgs) =>
             {
-                Process.Start
-                (
-                    new ProcessStartInfo("https://www.facebook.com/profile.php?id=100010457925248")
-                    {
-                        UseShellExecute = true
-                    }
-                );
+                string profile = "https://www.facebook.com/profile.php?id=100010457925248";
+                Process.Start(new ProcessStartInfo(profile) { UseShellExecute = true });
             };
-            Controls.Add(fbLogo);
-
             //Information icon
-            PictureBox infoIcon = new PictureBox()
+            PictureBox infoIcon = new()
             {
                 Image = Properties.Resources.github,
                 SizeMode = PictureBoxSizeMode.StretchImage,
@@ -123,123 +96,112 @@ namespace TextEditor
             };
             infoIcon.Click += (sender, eventArgs) =>
             {
-                Process.Start
-                (
-                    new ProcessStartInfo("https://github.com/Tsvetelinmarinov/TextEditorNew")
-                    {
-                        UseShellExecute = true
-                    }
-                );
+                string repo = "https://github.com/Tsvetelinmarinov/TextEditorNew";
+                Process.Start(new ProcessStartInfo(repo) { UseShellExecute = true });
             };
-            Controls.Add(infoIcon);
-
             //Spacer / Separator
-            Label topSpacer = new Label()
+            Label topSpacer = new()
             {
                 BackColor = Color.DarkGray,
                 Bounds = new Rectangle(0, 75, 530, 1)
             };
-            Controls.Add(topSpacer);
 
+            Controls.Add(topSpacer);
+            Controls.Add(bottomSpacer);
+            Controls.Add(infoIcon);
+            Controls.Add(fbLogo);
+        }
+        /// <summary>
+        /// Create and set the description labes
+        /// </summary>
+        private void BuildDescription()
+        {
             //Labels with the information about the editor
-            appName = new Label()
+            Label appName = new()
             {
                 Text = "Име на приложението",
                 Font = new Font("Seoge UI", 11),
                 Bounds = new Rectangle(5, 140, 200, 20)
             };
-            Controls.Add(appName);
-
-            appName2 = new Label()
+            Label appName2 = new()
             {
                 Text = "TextEditor++",
                 Font = appName.Font,
                 Bounds = new Rectangle(10, 160, 130, 20)
             };
-            Controls.Add(appName2);
-
-            appVersion = new Label()
+            Label appVersion = new()
             {
                 Text = "Версия",
                 Font = appName.Font,
                 Bounds = new Rectangle(5, 200, 100, 20)
             };
-            Controls.Add(appVersion);
-
-            appVersion2 = new Label()
+            Label appVersion2 = new()
             {
                 Text = "1.0.0",
                 Font = appName.Font,
                 Bounds = new Rectangle(10, 220, 100, 20)
             };
-            Controls.Add(appVersion2);
-
-            description = new Label()
+            Label description = new()
             {
                 Text = "Предназначение",
                 Font = appName.Font,
                 Bounds = new Rectangle(5, 260, 130, 20)
             };
-            Controls.Add(description);
-
-            description2 = new Label()
+            Label description2 = new()
             {
                 Text = "Опростен текстов рекактор работещ с базови програмни файлове",
                 Font = appName.Font,
                 Bounds = new Rectangle(10, 280, 480, 20)
             };
-            Controls.Add(description2);
-
-            author = new Label()
+            Label author = new()
             {
                 Text = "Програмист",
                 Font = appName.Font,
                 Bounds = new Rectangle(5, 320, 100, 20)
             };
-            Controls.Add(author);
-
-            authorName = new Label()
+            Label authorName = new()
             {
                 Text = "Цветелин Маринов",
                 Font = appName.Font,
                 Bounds = new Rectangle(10, 340, 150, 20)
             };
-            Controls.Add(authorName);
-
-            manifacture = new Label()
+            Label manifacture = new()
             {
                 Text = "Дата на пускане в употреба",
                 Font = appName.Font,
                 Bounds = new Rectangle(5, 380, 300, 20)
             };
-            Controls.Add(manifacture);
-
-            manifacture2 = new Label()
+            Label manifacture2 = new()
             {
                 Text = "Неделя, 11 Май, 2025",
                 Font = appName.Font,
                 Bounds = new Rectangle(10, 400, 170, 20)
             };
-            Controls.Add(manifacture2);
-
-            place = new Label()
+            Label place = new()
             {
                 Text = "Място на пройзводство",
                 Font = appName.Font,
                 Bounds = new Rectangle(5, 440, 190, 20)
             };
-            Controls.Add(place);
-
-            place2 = new Label()
+            Label place2 = new()
             {
                 Text = "София, България (BG), Европейски съюз (EU)",
                 Font = appName.Font,
                 Bounds = new Rectangle(10, 460, 500, 20)
             };
+
+            Controls.Add(appName);
+            Controls.Add(appName2);
+            Controls.Add(appVersion);
+            Controls.Add(appVersion2);
+            Controls.Add(description);
+            Controls.Add(description2);
+            Controls.Add(author);
+            Controls.Add(authorName);
+            Controls.Add(manifacture);
+            Controls.Add(manifacture2);
+            Controls.Add(place);
             Controls.Add(place2);
-
         }
-
     }
-
 }

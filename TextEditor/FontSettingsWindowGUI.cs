@@ -9,45 +9,36 @@ using System.Drawing.Text;
 using System.Drawing;
 using System;
 
-
 namespace TextEditor
 {
-
     internal class FontSettingsWindowGUI : Form
     {
-
         //Font name
         private Label fontName;
         private ComboBox fontBox;
         private InstalledFontCollection fonts;
-
         //Font style
         private Label fontStyle;
         private ComboBox fontStylesBox;
-
         //Font size
         private Label fontSize;
         private NumericUpDown fontSizeSpiner;
-
         //Font color
         private Label fontColor;
         private Label fontColorChooser;
-
         //Event for changing the font
-        public event Action<Font> FontChanged;
-
-        //Event for changing the foreground
+        public new event Action<Font> FontChanged;                                  
         public event Action<Color> ForegroundOnChange;
-
         //Dynamic font style - changed
         private FontStyle style;
-
         //Connect to the main GUI
-        private ApplicationGUI app = new ApplicationGUI();
+        private readonly ApplicationGUI app;
 
+        /// <summary>
+        /// The Graphical User Interface of the Font settings window
+        /// </summary>
         public FontSettingsWindowGUI()
         {
-
             //Initialize components
             PlaceComponents();
 
@@ -62,16 +53,13 @@ namespace TextEditor
             MaximizeBox = false;
             MinimumSize = Size;
             MaximumSize = Size;
-
         }
 
-
-        /**
-         * Build the font settings window components
-         */
+        /// <summary>
+        /// Create and set the Graphical User Interface
+        /// </summary>
         private void PlaceComponents()
         {
-
             //Font name
             fontName = new Label()
             {
@@ -80,7 +68,6 @@ namespace TextEditor
                 Bounds = new Rectangle(20, 40, 60, 20)
             };
             Controls.Add(fontName);
-
             fontBox = new ComboBox()
             {
                 Bounds = new Rectangle(82, 37, 250, 30),
@@ -89,14 +76,11 @@ namespace TextEditor
                 BackColor = Color.GhostWhite,
                 Cursor = Cursors.Hand
             };
-
             fonts = new InstalledFontCollection();
-
             foreach (FontFamily fontFamily in fonts.Families)
             {
                 fontBox.Items.Add(fontFamily.Name);
             }
-
             fontBox.SelectedItem = "Cascadia Code";
             fontBox.SelectedIndexChanged += (sender, eventArgs) =>
             {
@@ -118,7 +102,7 @@ namespace TextEditor
             };
             Controls.Add(fontBox);
 
-            //Font size label
+            //Font size
             fontSize = new Label()
             {
                 Text = "размер",
@@ -126,7 +110,6 @@ namespace TextEditor
                 Bounds = new Rectangle(355, 40, 65, 20)
             };
             Controls.Add(fontSize);
-
             fontSizeSpiner = new NumericUpDown()
             {
                 Minimum = 1,
@@ -165,7 +148,6 @@ namespace TextEditor
                 Bounds = new Rectangle(504, 40, 45, 20)
             };
             Controls.Add(fontStyle);
-
             fontStylesBox = new ComboBox()
             {
                 Bounds = new Rectangle(552, 37, 180, 25),
@@ -174,14 +156,11 @@ namespace TextEditor
                 BackColor = Color.GhostWhite,
                 Cursor = Cursors.Hand
             };
-
-            string[] fontStyles = { "нормален", "наклонен", "удебелен", "наклонен и удебелен" };
-
+            string[] fontStyles = [ "нормален", "наклонен", "удебелен", "наклонен и удебелен" ];
             foreach (string style in fontStyles)
             {
                 fontStylesBox.Items.Add(style);
             }
-
             fontStylesBox.SelectedItem = "нормален";
             fontStylesBox.SelectedIndexChanged += (sender, eventArgs) =>
             {
@@ -242,7 +221,6 @@ namespace TextEditor
                 Bounds = new Rectangle(756, 40, 45, 20)
             };
             Controls.Add(fontColor);
-
             fontColorChooser = new Label()
             {
                 Bounds = new Rectangle(807, 38, 25, 25),
@@ -272,7 +250,5 @@ namespace TextEditor
             Controls.Add(fontColorChooser);
            
         }
-
     }
-
 }

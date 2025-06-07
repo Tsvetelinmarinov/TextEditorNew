@@ -5,24 +5,8 @@
  */
 
 using System.Windows.Forms;
-using System;
+using TextEditor;
 
-namespace TextEditor
-{
-
-    internal class Starter
-    {
-
-        [STAThread]
-        static void Main(string[] args)
-        {
-
-            Application.SetCompatibleTextRenderingDefault(true);
-            Application.EnableVisualStyles();
-            Application.Run(new ApplicationGUI());
-
-        }
-
-    }
-
-}
+Application.SetCompatibleTextRenderingDefault(true);
+Application.EnableVisualStyles();
+Application.Run(new ApplicationGUI());
