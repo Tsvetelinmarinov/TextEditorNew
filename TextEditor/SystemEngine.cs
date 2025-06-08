@@ -16,6 +16,10 @@ namespace TextEditor
 {
     internal class SystemEngine
     {
+        /// <summary>
+        /// Creates a new file in the text editor
+        /// </summary>
+        /// <param name="box"></param>
         public void CreateNewFile(RichTextBox box)
         {
             if 
@@ -36,6 +40,10 @@ namespace TextEditor
             }
 
         }
+        /// <summary>
+        /// Opens local file in the text editor
+        /// </summary>
+        /// <param name="box"></param>
         public void LoadDataFromFile(RichTextBox box)
         {
             if 
@@ -101,6 +109,10 @@ namespace TextEditor
                 }
             }
         }
+        /// <summary>
+        /// Save current file in the editor to the local system
+        /// </summary>
+        /// <param name="box"></param>
         public void ExportDataToLocalFile(RichTextBox box)
         {
             if (box.Text != null && box.Text != "")
@@ -126,6 +138,10 @@ namespace TextEditor
                 }
             }
         }
+        /// <summary>
+        /// Restart the application
+        /// </summary>
+        /// <param name="box"></param>
         public void Reboot(RichTextBox box)
         {
             if (box.Text != null && box.Text != "")
@@ -150,6 +166,10 @@ namespace TextEditor
                 Application.Restart();
             }
         }
+        /// <summary>
+        /// Quit the application
+        /// </summary>
+        /// <param name="box"></param>
         public void Quit(RichTextBox box)
         {
             bool hasText = box.Text != null && box.Text != "";    
@@ -177,6 +197,10 @@ namespace TextEditor
                 Environment.Exit(0);
             }
         }
+        /// <summary>
+        /// Group the menu items from "theme menu"
+        /// </summary>
+        /// <param name="menus"></param>
         public void GroupMenuItems(ToolStripMenuItem[] menus)
         {
             bool hasChecked = false;
@@ -203,6 +227,14 @@ namespace TextEditor
                 menus[0].Checked = true;
             }
         }
+        /// <summary>
+        /// Change to the dark mode
+        /// </summary>
+        /// <param name="editor"></param>
+        /// <param name="boxPanel"></param>
+        /// <param name="box"></param>
+        /// <param name="menuBar"></param>
+        /// <param name="menus"></param>
         public void ChangeToDarkMode(ApplicationGUI editor, Panel boxPanel, RichTextBox box, MenuStrip menuBar, ToolStripMenuItem[] menus)
         {           
             editor.BackColor = Color.FromArgb(35, 35, 35);
@@ -220,6 +252,14 @@ namespace TextEditor
                 menu.ForeColor = Color.GhostWhite;
             };
         }
+        /// <summary>
+        /// Change to the origina blue mode
+        /// </summary>
+        /// <param name="editor"></param>
+        /// <param name="box"></param>
+        /// <param name="boxPanel"></param>
+        /// <param name="menuBar"></param>
+        /// <param name="menus"></param>
         public void ChangeToBlueMode(ApplicationGUI editor, RichTextBox box, Panel boxPanel, MenuStrip menuBar, ToolStripMenuItem[] menus)
         {
             editor.BackColor = Color.GhostWhite;
@@ -236,6 +276,14 @@ namespace TextEditor
                 menu.ForeColor = Color.Black;
             }
         }
+        /// <summary>
+       /// Changle to the ligth mode
+       /// </summary>
+       /// <param name="editor"></param>
+       /// <param name="box"></param>
+       /// <param name="boxPanel"></param>
+       /// <param name="menuBar"></param>
+       /// <param name="menus"></param>
         public void ChangeToLightMode(ApplicationGUI editor, RichTextBox box, Panel boxPanel, MenuStrip menuBar, ToolStripMenuItem[] menus)
         {
             editor.BackColor = Color.White;
@@ -252,6 +300,10 @@ namespace TextEditor
                 menu.ForeColor = Color.Black;
             }
         }
+        /// <summary>
+        /// Set the blue mode icons of the menus
+        /// </summary>
+        /// <param name="menus"></param>
         public void SetBlueModeIcons(ToolStripMenuItem[] menus)
         {         
             menus[0].Image = Properties.Resources.newFile;
@@ -275,6 +327,10 @@ namespace TextEditor
             menus[18].Image = Properties.Resources.fontAndColor;
             menus[19].Image = Properties.Resources.infoMenu;
         }
+        /// <summary>
+        /// Set the ligth mode icons of the menus
+        /// </summary>
+        /// <param name="menus"></param>
         public void SetLightModeIcons(ToolStripMenuItem[] menus)
         {
             menus[0].Image = Properties.Resources.newFile;
@@ -298,6 +354,10 @@ namespace TextEditor
             menus[18].Image = Properties.Resources.fontAndColor;
             menus[19].Image = Properties.Resources.infoMenu;
         }
+        /// <summary>
+        /// Set the dark mode icons of the menus
+        /// </summary>
+        /// <param name="menus"></param>
         public void SetDarkModeIcons(ToolStripMenuItem[] menus)
         {
             menus[0].Image = Properties.Resources.newFileDark;
@@ -321,6 +381,11 @@ namespace TextEditor
             menus[18].Image = Properties.Resources.fontAndColorDark;
             menus[19].Image = Properties.Resources.infoDark;
         }
+        /// <summary>
+        /// Paint the keywords, strings, numbers, special symbols and methods
+        /// in the blue mode and the ligth mode
+        /// </summary>
+        /// <param name="editor"></param>
         public void MatchKeywords(RichTextBox editor)
         {
             // Регулярен израз за всички C# ключови думи (цели думи)
@@ -460,6 +525,11 @@ namespace TextEditor
             editor.SelectionColor = Color.FromArgb(100, 40, 40, 40);
             editor.ResumeLayout(); // Възобновяване на обновяването на редактора
         }
+        /// <summary>
+        /// Paint the keywords, strings, numbers, special symbols and methods
+        /// in the dark mode
+        /// </summary>
+        /// <param name="editor"></param>
         public void MatchKeywordsDark(RichTextBox editor)
         {
             // Шаблон за всички C# ключови думи (цели думи)
@@ -600,6 +670,11 @@ namespace TextEditor
             editor.SelectionColor = Color.GhostWhite;
             editor.ResumeLayout(); // Възобновяване на обновяването на редактора
         }
+        /// <summary>
+        /// Compile the text in the text box and run it with csc.exe(The C# compiler)
+        /// in the system terminal or power shell
+        /// </summary>
+        /// <param name="editor"></param>
         public void CompileAndRun(RichTextBox editor)
         {
             // 1. Запиши кода във временен файл

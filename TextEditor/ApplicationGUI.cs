@@ -108,11 +108,6 @@ namespace TextEditor
             };
 
             //Build the GUI
-            BuildGUI();
-        }
-
-        private void BuildGUI()
-        {   
             BuildMenuBar();
             BuildPanelAndEditor();
             BuildFileMenuAndFileMenuItems();
@@ -122,6 +117,7 @@ namespace TextEditor
             BuildHelpMenuAndInformationMenuItem();
             BuildExecutionButton();
         }
+
         private void BuildPanelAndEditor()
        {
             // Setting up the panel for the editor
