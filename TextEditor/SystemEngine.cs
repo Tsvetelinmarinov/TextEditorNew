@@ -40,6 +40,7 @@ namespace TextEditor
             }
 
         }
+
         /// <summary>
         /// Opens local file in the text editor
         /// </summary>
@@ -79,16 +80,13 @@ namespace TextEditor
                 {
                     box.Text = File.ReadAllText(fileChooser.FileName);
                 }
-
             }
             else
             {
-                using 
-                (
-                    OpenFileDialog fileChooser = new OpenFileDialog()
-                    {
-                        Title = "Отваряне на файл",
-                        Filter = 
+                using OpenFileDialog fileChooser = new()
+                {
+                    Title = "Отваряне на файл",
+                    Filter =
                         "All Files (*.*)|*.*|" +
                         "Text Files (*.txt)|*.txt|" +
                         "C# Files (*.cs)|*.cs|" +
@@ -96,19 +94,17 @@ namespace TextEditor
                         "HTML document (*.html)|*.html|" +
                         "Stylesheet (*.css)|*.css|" +
                         "JavaScript Files (*.js)|*.js",
-                        InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer),
-                        DefaultExt = "txt",
-                        Multiselect = true
-                    }
-                )
+                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer),
+                    DefaultExt = "txt",
+                    Multiselect = true
+                };
+                if (fileChooser.ShowDialog() == DialogResult.OK)
                 {
-                    if (fileChooser.ShowDialog() == DialogResult.OK)
-                    {
-                        box.Text = File.ReadAllText(fileChooser.FileName);
-                    }
+                    box.Text = File.ReadAllText(fileChooser.FileName);
                 }
             }
         }
+
         /// <summary>
         /// Save current file in the editor to the local system
         /// </summary>
@@ -138,6 +134,7 @@ namespace TextEditor
                 }
             }
         }
+
         /// <summary>
         /// Restart the application
         /// </summary>
@@ -166,6 +163,7 @@ namespace TextEditor
                 Application.Restart();
             }
         }
+
         /// <summary>
         /// Quit the application
         /// </summary>
@@ -197,6 +195,7 @@ namespace TextEditor
                 Environment.Exit(0);
             }
         }
+
         /// <summary>
         /// Group the menu items from "theme menu"
         /// </summary>
@@ -227,6 +226,7 @@ namespace TextEditor
                 menus[0].Checked = true;
             }
         }
+
         /// <summary>
         /// Change to the dark mode
         /// </summary>
@@ -252,6 +252,7 @@ namespace TextEditor
                 menu.ForeColor = Color.GhostWhite;
             };
         }
+        
         /// <summary>
         /// Change to the origina blue mode
         /// </summary>
@@ -276,6 +277,7 @@ namespace TextEditor
                 menu.ForeColor = Color.Black;
             }
         }
+        
         /// <summary>
        /// Changle to the ligth mode
        /// </summary>
@@ -300,6 +302,7 @@ namespace TextEditor
                 menu.ForeColor = Color.Black;
             }
         }
+        
         /// <summary>
         /// Set the blue mode icons of the menus
         /// </summary>
@@ -327,6 +330,7 @@ namespace TextEditor
             menus[18].Image = Properties.Resources.fontAndColor;
             menus[19].Image = Properties.Resources.infoMenu;
         }
+       
         /// <summary>
         /// Set the ligth mode icons of the menus
         /// </summary>
@@ -354,6 +358,7 @@ namespace TextEditor
             menus[18].Image = Properties.Resources.fontAndColor;
             menus[19].Image = Properties.Resources.infoMenu;
         }
+        
         /// <summary>
         /// Set the dark mode icons of the menus
         /// </summary>
@@ -381,6 +386,7 @@ namespace TextEditor
             menus[18].Image = Properties.Resources.fontAndColorDark;
             menus[19].Image = Properties.Resources.infoDark;
         }
+       
         /// <summary>
         /// Paint the keywords, strings, numbers, special symbols and methods
         /// in the blue mode and the ligth mode
@@ -525,6 +531,7 @@ namespace TextEditor
             editor.SelectionColor = Color.FromArgb(100, 40, 40, 40);
             editor.ResumeLayout(); // Възобновяване на обновяването на редактора
         }
+       
         /// <summary>
         /// Paint the keywords, strings, numbers, special symbols and methods
         /// in the dark mode
@@ -670,6 +677,7 @@ namespace TextEditor
             editor.SelectionColor = Color.GhostWhite;
             editor.ResumeLayout(); // Възобновяване на обновяването на редактора
         }
+       
         /// <summary>
         /// Compile the text in the text box and run it with csc.exe(The C# compiler)
         /// in the system terminal or power shell

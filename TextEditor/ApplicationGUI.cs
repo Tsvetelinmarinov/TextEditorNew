@@ -4,6 +4,7 @@
  * ApplicationGUI - The Graphical User Interface for the application.
  */
 
+using System;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -119,7 +120,7 @@ namespace TextEditor
         }
 
         private void BuildPanelAndEditor()
-       {
+        {
             // Setting up the panel for the editor
             textAreaPanel.Bounds = new Rectangle(-1, 55, 1782, 834);
             textAreaPanel.BackColor = Color.FromArgb(140, 80, 80, 200); // Border color
@@ -161,15 +162,39 @@ namespace TextEditor
 
                     if (!inString)
                     {
-                        // Вмъкни текста на позицията на курсора
-                        editor.SelectedText = "\n{\n\n    \n\n}";
-                        // Премести курсора между скобите, след отстъпа
-                        editor.SelectionStart = currentCursorPosition + 8;
+                        // Намери началото на текущия ред
+                        int lineStart = editor.Text.LastIndexOf('\n', Math.Max(0, currentCursorPosition - 1));
+                        if (lineStart == -1)
+                        {
+                            lineStart = 0;
+                        }
+                        else
+                        {
+                            lineStart++;
+                        }
+
+                        // Вземи отстъпа (интервалите) на текущия ред
+                        int indentLength = 0;
+                        while ( 
+                            lineStart + indentLength < editor.Text.Length && 
+                            (editor.Text[lineStart + indentLength] == ' ' || editor.Text[lineStart + indentLength] == '\t')
+                        )
+                        {
+                            indentLength++;
+                        }
+
+                        string currentIndent = editor.Text.Substring(lineStart, indentLength);
+                        // Добави 4 интервала за новия скоуп
+                        string newIndent = currentIndent + "    ";
+                        // Създай текста със скобите и отстъпа
+                        string braces = $"\n{currentIndent}{{\n{newIndent}\n{currentIndent}}}";
+                        editor.SelectedText = braces;
+                        // Премести курсора между скобите, след новия отстъп
+                        editor.SelectionStart = currentCursorPosition + braces.IndexOf('\n', 1) + newIndent.Length + 2;
                         eventArgs.Handled = true;
                     }
 
                 }
-
             };
             //Write four spaces when pressing tab
             editor.KeyDown += (sender, eventArgs) =>
